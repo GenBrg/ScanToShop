@@ -47,4 +47,5 @@ dependencies {
     implementation "androidx.camera:camera-view:1.0.0-SNAPSHOT"
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.google.guava:guava:27.1-android'
+    implementation "androidx.cardview:cardview:1.0.0"
 }
