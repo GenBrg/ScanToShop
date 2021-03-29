@@ -8,9 +8,4 @@
         android:title="@string/scan"
         app:showAsAction="ifRoom"/>
 
-<!--    &lt;!&ndash; Settings, should always be in the overflow &ndash;&gt;-->
-<!--    <item android:id="@+id/action_settings"-->
-<!--        android:title="@string/action_settings"-->
-<!--        app:showAsAction="never"/>-->
-
 </menu>
