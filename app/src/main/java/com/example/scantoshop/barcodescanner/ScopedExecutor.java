@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop;
+package com.example.scantoshop.barcodescanner;
 
 import androidx.annotation.NonNull;
 import java.util.concurrent.Executor;

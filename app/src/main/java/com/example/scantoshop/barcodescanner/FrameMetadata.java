@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop;
+package com.example.scantoshop.barcodescanner;
 
 /** Describing a frame info. */
 public class FrameMetadata {

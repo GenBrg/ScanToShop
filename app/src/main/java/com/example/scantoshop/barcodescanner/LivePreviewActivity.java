@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop;
+package com.example.scantoshop.barcodescanner;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,22 +25,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
 
-import com.example.scantoshop.barcodescanner.BarcodeScannerProcessor;
-import com.example.scantoshop.preference.SettingsActivity;
+import com.example.scantoshop.R;
 import com.google.android.gms.common.annotation.KeepName;
-import com.google.mlkit.common.model.LocalModel;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

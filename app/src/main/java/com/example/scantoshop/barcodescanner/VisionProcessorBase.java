@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop;
+package com.example.scantoshop.barcodescanner;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
@@ -35,7 +35,6 @@ import androidx.camera.core.ImageProxy;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.mlkit.vision.common.InputImage;
-import com.example.scantoshop.preference.PreferenceUtils;
 
 import java.nio.ByteBuffer;
 import java.util.Timer;

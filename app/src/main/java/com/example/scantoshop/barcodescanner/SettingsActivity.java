@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop.preference;
+package com.example.scantoshop.barcodescanner;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
@@ -23,6 +23,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.scantoshop.R;
+import com.example.scantoshop.barcodescanner.LivePreviewPreferenceFragment;
 
 /**
  * Hosts the preference fragment to configure settings for a demo activity that specified by the
@@ -34,11 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
 
   /** Specifies where this activity is launched from. */
   public enum LaunchSource {
-    LIVE_PREVIEW(R.string.pref_screen_title_live_preview, LivePreviewPreferenceFragment.class),
-    STILL_IMAGE(R.string.pref_screen_title_still_image, StillImagePreferenceFragment.class),
-    CAMERAX_LIVE_PREVIEW(
-        R.string.pref_screen_title_camerax_live_preview,
-        CameraXLivePreviewPreferenceFragment.class);
+    LIVE_PREVIEW(R.string.pref_screen_title_live_preview, LivePreviewPreferenceFragment.class);
 
     private final int titleResId;
     private final Class<? extends PreferenceFragment> prefFragmentClass;
