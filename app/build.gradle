@@ -1,4 +1,7 @@
+
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -13,6 +16,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+//    dataBinding {
+//        enabled = true
+//    }
 
     buildTypes {
         release {
@@ -30,6 +37,7 @@ repositories {
     maven { url 'https://androidx.dev/snapshots/builds/6787662/artifacts/repository/' }
 }
 dependencies {
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
@@ -55,6 +63,12 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     //annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "android.arch.persistence.room:compiler:1.0.0-alpha9"
+
+    // new line
+    kapt 'android.arch.persistence.room:compiler:1.0.0'
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+    //annotationProcessor  'android.arch.persistence.room:compiler:1.0.0'
+
 
     // optional - RxJava2 support for Room
     implementation "androidx.room:room-rxjava2:$room_version"

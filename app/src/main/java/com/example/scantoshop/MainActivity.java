@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "scan_to_shop_database").build();
+                AppDatabase.class, "scan_to_shop_database").allowMainThreadQueries().build();
         ProfileDAO profileDao = db.profileDAO();
         Profile[] profiles = profileDao.loadAllProfiles();
 

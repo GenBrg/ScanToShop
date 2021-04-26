@@ -14,5 +14,5 @@ public class Item {
     public String iname;
 
     @ColumnInfo(name = "item_image")
-    public Path image_path;
+    public String image_path;
 }

@@ -14,5 +14,5 @@ public class PurchaseHistory {
     public String userCreateId;
 
     @ColumnInfo(name = "purchase_date")
-    public Date purchase_date;
+    public String purchase_date;
 }
