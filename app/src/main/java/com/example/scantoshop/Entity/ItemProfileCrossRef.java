@@ -1,4 +1,5 @@
 package com.example.scantoshop.Entity;
+import androidx.annotation.NonNull;
 import androidx.room.*;
 
 import org.jetbrains.annotations.NotNull;

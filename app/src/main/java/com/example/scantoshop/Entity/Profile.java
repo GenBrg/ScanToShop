@@ -9,6 +9,7 @@ import androidx.room.*;
 public class Profile {
     @NonNull
     @PrimaryKey
+    @NonNull
     public String uid;
 
     @ColumnInfo(name = "user_name")

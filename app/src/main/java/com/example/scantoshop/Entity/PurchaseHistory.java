@@ -1,6 +1,6 @@
 package com.example.scantoshop.Entity;
 import androidx.room.*;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Purchase History Entity
