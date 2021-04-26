@@ -2,14 +2,15 @@ package com.example.scantoshop.Entity;
 import androidx.annotation.NonNull;
 import androidx.room.*;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Profile Entity
  */
 @Entity
 public class Profile {
-    @NonNull
+    @NotNull
     @PrimaryKey
-    @NonNull
     public String uid;
 
     @ColumnInfo(name = "user_name")
