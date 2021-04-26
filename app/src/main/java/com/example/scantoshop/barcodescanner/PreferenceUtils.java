@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop.preference;
+package com.example.scantoshop.barcodescanner;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -28,9 +28,8 @@ import androidx.camera.core.CameraSelector;
 
 import com.google.android.gms.common.images.Size;
 import com.google.common.base.Preconditions;
-import com.google.mlkit.common.model.LocalModel;
-import com.example.scantoshop.CameraSource;
-import com.example.scantoshop.CameraSource.SizePair;
+import com.example.scantoshop.barcodescanner.CameraSource;
+import com.example.scantoshop.barcodescanner.CameraSource.SizePair;
 import com.example.scantoshop.R;
 
 /** Utility class to retrieve shared preferences. */

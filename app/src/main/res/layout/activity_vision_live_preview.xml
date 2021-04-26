@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
-  <com.example.scantoshop.CameraSourcePreview
+  <com.example.scantoshop.barcodescanner.CameraSourcePreview
       android:id="@+id/preview_view"
       android:layout_width="match_parent"
       android:layout_height="0dp"
       app:layout_constraintTop_toTopOf="parent" />
 
-  <com.example.scantoshop.GraphicOverlay
+  <com.example.scantoshop.barcodescanner.GraphicOverlay
       android:id="@+id/graphic_overlay"
       android:layout_width="0dp"
       android:layout_height="0dp"

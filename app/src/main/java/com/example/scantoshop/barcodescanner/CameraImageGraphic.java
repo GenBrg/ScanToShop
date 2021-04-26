@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop.preference;
+package com.example.scantoshop.barcodescanner;
 
-import android.os.Bundle;
-import android.preference.PreferenceFragment;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import com.example.scantoshop.barcodescanner.GraphicOverlay.Graphic;
 
-import com.example.scantoshop.R;
+/** Draw camera image to background. */
+public class CameraImageGraphic extends Graphic {
 
-/** Configures still image demo settings. */
-public class StillImagePreferenceFragment extends PreferenceFragment {
+  private final Bitmap bitmap;
+
+  public CameraImageGraphic(GraphicOverlay overlay, Bitmap bitmap) {
+    super(overlay);
+    this.bitmap = bitmap;
+  }
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    addPreferencesFromResource(R.xml.preference_still_image);
+  public void draw(Canvas canvas) {
+    canvas.drawBitmap(bitmap, getTransformationMatrix(), null);
   }
 }

@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
 import androidx.room.Room;
 import com.example.scantoshop.DAO.ProfileDAO;
 import com.example.scantoshop.Entity.Profile;
 import com.example.scantoshop.util.AppDatabase;
+import com.example.scantoshop.barcodescanner.LivePreviewActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

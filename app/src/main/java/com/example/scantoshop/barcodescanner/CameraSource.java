@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop;
+package com.example.scantoshop.barcodescanner;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -31,9 +31,7 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.WindowManager;
 import com.google.android.gms.common.images.Size;
-import com.example.scantoshop.FrameMetadata;
-import com.example.scantoshop.VisionImageProcessor;
-import com.example.scantoshop.preference.PreferenceUtils;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
