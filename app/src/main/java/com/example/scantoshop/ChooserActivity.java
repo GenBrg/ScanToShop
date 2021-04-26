@@ -35,6 +35,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
+import com.google.android.datatransport.backend.cct.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.List;
