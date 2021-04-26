@@ -1,4 +1,5 @@
 package com.example.scantoshop.Entity;
+import androidx.annotation.NonNull;
 import androidx.room.*;
 
 /**
@@ -7,6 +8,7 @@ import androidx.room.*;
 @Entity
 public class Profile {
     @PrimaryKey
+    @NonNull
     public String uid;
 
     @ColumnInfo(name = "user_name")

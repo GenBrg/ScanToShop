@@ -1,6 +1,6 @@
 package com.example.scantoshop.Entity;
 import androidx.room.*;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Purchase History Entity
@@ -14,5 +14,5 @@ public class PurchaseHistory {
     public String userCreateId;
 
     @ColumnInfo(name = "purchase_date")
-    public Date purchase_date;
+    public String purchase_date;
 }

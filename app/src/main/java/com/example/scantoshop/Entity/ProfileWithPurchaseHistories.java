@@ -13,7 +13,7 @@ public class ProfileWithPurchaseHistories {
     @Embedded public Profile profile;
     @Relation(
             parentColumn = "uid",
-            entityColumn = "userCreateId"
+            entityColumn = "user_create_id"
     )
     public List<PurchaseHistory> purchaseHistoryList;
 }
