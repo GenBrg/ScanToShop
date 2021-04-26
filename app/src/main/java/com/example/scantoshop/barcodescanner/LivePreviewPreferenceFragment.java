@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop.preference;
+package com.example.scantoshop.barcodescanner;
 
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -26,8 +26,7 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
-import com.example.scantoshop.CameraSource;
-import com.example.scantoshop.CameraSource.SizePair;
+import com.example.scantoshop.barcodescanner.CameraSource.SizePair;
 import com.example.scantoshop.R;
 
 import java.util.HashMap;

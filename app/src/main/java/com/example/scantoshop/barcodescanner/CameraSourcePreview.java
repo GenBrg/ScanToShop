@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.scantoshop;
+package com.example.scantoshop.barcodescanner;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -24,7 +24,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
 import com.google.android.gms.common.images.Size;
-import com.example.scantoshop.preference.PreferenceUtils;
+
 import java.io.IOException;
 
 /** Preview the camera image in the screen. */

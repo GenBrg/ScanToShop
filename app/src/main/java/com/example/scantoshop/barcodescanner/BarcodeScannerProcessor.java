@@ -27,8 +27,6 @@ import com.google.mlkit.vision.barcode.Barcode;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.common.InputImage;
-import com.example.scantoshop.GraphicOverlay;
-import com.example.scantoshop.VisionProcessorBase;
 
 import java.util.List;
 
@@ -38,9 +36,10 @@ public class BarcodeScannerProcessor extends VisionProcessorBase<List<Barcode>> 
   private static final String TAG = "BarcodeProcessor";
 
   private final BarcodeScanner barcodeScanner;
-
+  private Context context;
   public BarcodeScannerProcessor(Context context) {
     super(context);
+    this.context = context;
     // Note that if you know which format of barcode your app is dealing with, detection will be
     // faster to specify the supported barcode formats one by one, e.g.
     // new BarcodeScannerOptions.Builder()
@@ -65,10 +64,13 @@ public class BarcodeScannerProcessor extends VisionProcessorBase<List<Barcode>> 
           @NonNull List<Barcode> barcodes, @NonNull GraphicOverlay graphicOverlay) {
     if (barcodes.isEmpty()) {
       Log.v(MANUAL_TESTING_LOG, "No barcode has been detected");
+      return;
     }
     for (int i = 0; i < barcodes.size(); ++i) {
       Barcode barcode = barcodes.get(i);
       graphicOverlay.add(new BarcodeGraphic(graphicOverlay, barcode));
+      LivePreviewActivity activity = (LivePreviewActivity) context;
+      activity.onBarcodeDetected(barcode.getRawValue());
       logExtrasForTesting(barcode);
     }
   }
