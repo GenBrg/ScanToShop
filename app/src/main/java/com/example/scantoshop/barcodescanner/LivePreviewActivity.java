@@ -178,7 +178,9 @@ public final class LivePreviewActivity extends AppCompatActivity
     createCameraSource(selectedModel);
     startCameraSource();
   }
-
+  public void restartCamera(){
+    startCameraSource();
+  }
   /** Stops the camera. */
   @Override
   protected void onPause() {
@@ -251,5 +253,13 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
     Log.i(TAG, "Permission NOT granted: " + permission);
     return false;
+  }
+  public void onBarcodeDetected(String barcodeRawValue){
+    onPause();
+    Bundle bundle = new Bundle();
+    bundle.putString("barcodeRawValue", barcodeRawValue);
+    ItemDialogFragment itemDialog = new ItemDialogFragment();
+    itemDialog.show(getSupportFragmentManager(), "ModalBottomSheet");
+    itemDialog.setArguments(bundle);
   }
 }
