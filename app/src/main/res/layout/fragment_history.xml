@@ -20,6 +20,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
             <EditText
                 android:id="@+id/favoriteText1"
                 android:layout_width="match_parent"
@@ -30,10 +31,11 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:inputType="none"
-                android:text=" 02-25  Total 20" />
+                android:text=" 02-25  Total: 20" />
+
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="385dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -48,8 +50,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_1"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="86dp"
+                        android:layout_height="86dp"
                         android:contentDescription="@string/title_shoplist"
                         android:src="@drawable/milk" />
 
@@ -67,8 +69,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_2"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="86dp"
+                        android:layout_height="86dp"
                         android:contentDescription="@string/title_shoplist"
                         android:src="@drawable/apple" />
 
@@ -86,8 +88,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_3"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="86dp"
+                        android:layout_height="86dp"
                         android:contentDescription="@string/title_shoplist"
                         android:src="@drawable/cheese" />
 
@@ -104,8 +106,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_4"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="86dp"
+                        android:layout_height="86dp"
                         android:contentDescription="@string/title_shoplist"
                         android:src="@drawable/banana" />
 
@@ -113,6 +115,13 @@
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detail" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -156,8 +165,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_6"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="86dp"
+                        android:layout_height="86dp"
                         android:contentDescription="@string/title_shoplist"
                         android:src="@drawable/orange" />
 
@@ -175,8 +184,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_7"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="86dp"
+                        android:layout_height="86dp"
                         android:contentDescription="@string/title_shoplist"
                         android:src="@drawable/peach" />
 
@@ -185,6 +194,13 @@
 
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detail" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

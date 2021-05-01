@@ -1,9 +1,11 @@
 package com.example.scantoshop.ui.history;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,12 +19,26 @@ import com.example.scantoshop.R;
 public class HistoryFragment extends Fragment {
 
     private HistoryViewModel historyViewModel;
+    private Button btn1;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        historyViewModel =
-                ViewModelProviders.of(this).get(HistoryViewModel.class);
+
+//        historyViewModel =
+//                ViewModelProviders.of(this).get(HistoryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_history, container, false);
+        btn1 = (Button) root.findViewById(R.id.button1);
+        btn1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), HistoryDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
 //        final TextView textView = root.findViewById(R.id.text_dashboard);
 //        historyViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
@@ -32,4 +48,6 @@ public class HistoryFragment extends Fragment {
 //        });
         return root;
     }
+
+
 }

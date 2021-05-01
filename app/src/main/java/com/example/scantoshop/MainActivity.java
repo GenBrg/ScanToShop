@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 import androidx.room.Room;
 import com.example.scantoshop.DAO.ProfileDAO;
 import com.example.scantoshop.Entity.Profile;
+import com.example.scantoshop.ui.history.HistoryDetailActivity;
+import com.example.scantoshop.ui.history.HistoryFragment;
 import com.example.scantoshop.util.AppDatabase;
 import com.example.scantoshop.barcodescanner.LivePreviewActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,6 +25,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+    private Button button1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,18 @@ public class MainActivity extends AppCompatActivity {
         //        AppDatabase.class, "scan_to_shop_database").build();
         //ProfileDAO profileDao = db.profileDAO();
         //Profile[] profiles = profileDao.loadAllProfiles();
+//
+//        button1 = findViewById(R.id.button1);
+//        button1.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                Intent i = new Intent(MainActivity.this,HistoryDetailActivity.class);
+//                startActivity(i);
+//            }
+//        });
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
