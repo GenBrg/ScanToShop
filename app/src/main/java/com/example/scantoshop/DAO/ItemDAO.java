@@ -11,7 +11,10 @@ public interface ItemDAO {
     public void updateItems(Item... items);
 
     @Delete
-    public void deleteItems(Item... items);
+    public void deleteItem(Item item);
+
+    @Query("DELETE FROM item")
+    public void deleteAllItems();
 
     @Query("SELECT * FROM item")
     public Item[] loadAllItems();

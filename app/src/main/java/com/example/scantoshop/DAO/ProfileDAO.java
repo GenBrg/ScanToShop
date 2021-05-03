@@ -13,7 +13,10 @@ public interface ProfileDAO {
     public void updateProfiles(Profile... profiles);
 
     @Delete
-    public void deleteProfiles(Profile... profiles);
+    public void deleteProfile(Profile profile);
+
+    @Query("DELETE FROM profile")
+    public void deleteAllProfiles();
 
     @Query("SELECT * FROM profile")
     public Profile[] loadAllProfiles();

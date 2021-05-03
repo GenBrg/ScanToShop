@@ -15,4 +15,13 @@ public class Item {
 
     @ColumnInfo(name = "item_image")
     public String image_path;
+
+    @ColumnInfo(name = "nutrient")
+    public String nutrient;
+
+    @ColumnInfo(name = "health_label")
+    public String health_label;
+
+    @ColumnInfo(name = "category")
+    public String category;
 }
