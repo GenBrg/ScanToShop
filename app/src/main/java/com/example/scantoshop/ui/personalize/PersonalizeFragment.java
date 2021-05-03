@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class PersonalizeFragment extends Fragment {
     private PersonalizeViewModel personalizeViewModel;
     private Button btn1;
     private Button btn2;
+    private Button btn3;
     private TextView user_name;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -40,8 +42,8 @@ public class PersonalizeFragment extends Fragment {
                 .createFromAsset("database/scan2shopDB.db")
                 .allowMainThreadQueries().build();
         ProfileDAO profileDao = db.profileDAO();
-        Profile[] profiles = profileDao.loadAllProfiles();
-        user_name.setText(profiles[0].uname);
+        Profile user = profileDao.loadAllProfiles()[0];
+        user_name.setText(user.uname);
 //        personalizeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
 //            public void onChanged(@Nullable String s) {
@@ -66,6 +68,18 @@ public class PersonalizeFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), NutritionActivity.class);
                 startActivity(intent);
+            }
+        });
+        btn3 = (Button) root.findViewById(R.id.change_name_button);
+        btn3.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                EditText editText = root.findViewById(R.id.edit_text);
+                String new_name = editText.getText().toString();
+                user.uname = new_name;
+                profileDao.insertProfiles(user);
+                user_name.setText(new_name);
             }
         });
         return root;
