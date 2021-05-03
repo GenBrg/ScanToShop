@@ -58,6 +58,16 @@ public class PersonalizeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        btn2 = (Button) root.findViewById(R.id.nutrition_button);
+        btn2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), NutritionActivity.class);
+                startActivity(intent);
+            }
+        });
         return root;
     }
 }

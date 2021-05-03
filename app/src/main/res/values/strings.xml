@@ -139,4 +139,6 @@
     <drawable name="color1">#FF0000</drawable>
 
     <drawable name="color2">#C0C0C0</drawable>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
