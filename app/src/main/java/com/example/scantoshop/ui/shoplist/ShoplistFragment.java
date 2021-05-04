@@ -1,6 +1,7 @@
 package com.example.scantoshop.ui.shoplist;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,13 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import com.example.scantoshop.DAO.EntryDAO;
+import com.example.scantoshop.DAO.ItemDAO;
+import com.example.scantoshop.DAO.ProfileDAO;
 import com.example.scantoshop.R;
+import com.example.scantoshop.util.AppDatabase;
 
 import java.util.zip.Inflater;
 
@@ -29,8 +35,16 @@ public class ShoplistFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_shoplist, container, false);
-        final CurrentShoppingListAdapter currentShoppingListAdapter = new CurrentShoppingListAdapter();
 
+        AppDatabase db = Room.databaseBuilder(requireContext(),
+                AppDatabase.class, "MyDatabase")
+                .createFromAsset("database/scan2shopDB.db")
+                .allowMainThreadQueries().build();
+        ProfileDAO profileDao = db.profileDAO();
+        ItemDAO itemDAO = db.itemDAO();
+        EntryDAO entryDAO = db.entryDAO();
+        final CurrentShoppingListAdapter currentShoppingListAdapter = new CurrentShoppingListAdapter(profileDao, itemDAO, entryDAO);
+        currentShoppingListAdapter.setShoppingList(profileDao.getShoppingList().get(0).currentShoppingList);
         itemView = root.findViewById(R.id.shop_list);
         itemView.setAdapter(currentShoppingListAdapter);
         itemView.setLayoutManager(new GridLayoutManager(requireContext(), SPAN_COUNT));

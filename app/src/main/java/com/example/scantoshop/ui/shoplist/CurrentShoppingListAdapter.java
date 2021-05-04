@@ -2,6 +2,7 @@ package com.example.scantoshop.ui.shoplist;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
     private List<CurrentShoppingListEntry> shoppingList = new ArrayList<>();
     private Context context;
     private View itemView;
-    private AppDatabase db;
     private ProfileDAO profileDao;
     private ItemDAO itemDAO;
     private EntryDAO entryDAO;
@@ -46,11 +46,14 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
             downButton = itemView.findViewById(R.id.remove_item_button);
             deleteButton = itemView.findViewById(R.id.item_delete);
             quantity = itemView.findViewById(R.id.item_quantity);
-            itemImage.findViewById(R.id.item_img);
+            itemImage = itemView.findViewById(R.id.item_img);
         }
     }
 
-    public CurrentShoppingListAdapter() {
+    public CurrentShoppingListAdapter(ProfileDAO profileDao, ItemDAO itemDAO, EntryDAO entryDAO) {
+        this.profileDao = profileDao;
+        this.itemDAO = itemDAO;
+        this.entryDAO = entryDAO;
     }
 
     @NonNull
@@ -58,14 +61,6 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         itemView = LayoutInflater.from(context).inflate(R.layout.shopping_item, parent, false);
-        db = Room.databaseBuilder(context,
-                AppDatabase.class, "MyDatabase")
-                .createFromAsset("database/scan2shopDB.db")
-                .allowMainThreadQueries().build();
-        profileDao = db.profileDAO();
-        itemDAO = db.itemDAO();
-
-        shoppingList = profileDao.getShoppingList().get(0).currentShoppingList;
 
         return new ViewHolder(itemView);
     }
@@ -88,13 +83,18 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
         holder.quantity.setText(String.valueOf(entry.quantity));
         Picasso.with(context).load(item.image_path).into(holder.itemImage);
         holder.itemImage.setOnClickListener(v->{
-//            ItemDescriptionDialog.showItemDialog(context, item);
+//            TODO item description
         });
     }
 
     @Override
     public int getItemCount() {
         return shoppingList.size();
+    }
+
+    public void setShoppingList(List<CurrentShoppingListEntry> shoppingList) {
+        this.shoppingList = shoppingList;
+        notifyDataSetChanged();
     }
 
     private void setQuantity(CurrentShoppingListEntry entry, int quantity) {
