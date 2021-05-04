@@ -32,10 +32,11 @@
             app:srcCompat="@drawable/ic_star_24px" />
 
         <Button
-            android:id="@+id/fav_del_button"
-            android:layout_width="wrap_content"
+            android:id="@+id/fav_insert_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="delete" />
+            android:text="Insert to shopping list" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

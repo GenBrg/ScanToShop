@@ -84,17 +84,18 @@ public class FavoriteFragment extends Fragment {
             fullList.addAll(entry.getValue());
         }
 
-        final FavoriteListAdapter currentfavListAdapter = new FavoriteListAdapter(fullList);
-
-        itemView = root.findViewById(R.id.fav_recycle);
-        itemView.setAdapter(currentfavListAdapter);
-        itemView.setLayoutManager(new GridLayoutManager(requireContext(), SPAN_COUNT));
-
         // test add new CurrentShoppingListEntry
         CurrentShoppingListEntry newEntry = new CurrentShoppingListEntry("1", "1", 1);
         EntryDAO entryDAO = db.entryDAO();
         entryDAO.insertEntry(newEntry);
         Log.i("DATABASE", "new entry inserted");
+
+        final FavoriteListAdapter currentfavListAdapter = new FavoriteListAdapter(fullList, entryDAO);
+
+        itemView = root.findViewById(R.id.fav_recycle);
+        itemView.setAdapter(currentfavListAdapter);
+        itemView.setLayoutManager(new GridLayoutManager(requireContext(), SPAN_COUNT));
+
 
         return root;
     }

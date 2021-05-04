@@ -15,6 +15,12 @@ public interface EntryDAO {
     @Update
     public void updateEntries(CurrentShoppingListEntry... entries);
 
+    @Update
+    public void updateEntry(CurrentShoppingListEntry entry);
+
+    @Query("SELECT * FROM currentshoppinglistentry WHERE uid == :uid")
+    public CurrentShoppingListEntry[] loadEntryByUID(String uid);
+
     @Delete
     public void deleteEntries(CurrentShoppingListEntry entry);
 
