@@ -66,13 +66,14 @@ public class BarcodeScannerProcessor extends VisionProcessorBase<List<Barcode>> 
       Log.v(MANUAL_TESTING_LOG, "No barcode has been detected");
       return;
     }
-    for (int i = 0; i < barcodes.size(); ++i) {
-      Barcode barcode = barcodes.get(i);
-      graphicOverlay.add(new BarcodeGraphic(graphicOverlay, barcode));
-      LivePreviewActivity activity = (LivePreviewActivity) context;
-      activity.onBarcodeDetected(barcode.getRawValue());
-      logExtrasForTesting(barcode);
-    }
+    Barcode barcode = barcodes.get(0);
+    graphicOverlay.add(new BarcodeGraphic(graphicOverlay, barcode));
+    LivePreviewActivity activity = (LivePreviewActivity) context;
+    activity.onBarcodeDetected(barcode.getRawValue());
+    logExtrasForTesting(barcode);
+//    for (int i = 0; i < barcodes.size(); ++i) {
+//
+//    }
   }
 
   private static void logExtrasForTesting(Barcode barcode) {

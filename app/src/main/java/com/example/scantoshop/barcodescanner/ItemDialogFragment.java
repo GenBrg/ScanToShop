@@ -172,5 +172,6 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
     public void onDetach() {
         super.onDetach();
         ((LivePreviewActivity) getActivity()).restartCamera();
+        ((LivePreviewActivity) getActivity()).resetDetectedBarcodeStatus();
     }
 }
