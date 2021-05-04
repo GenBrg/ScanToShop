@@ -63,8 +63,7 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
         Button cancelButton = v.findViewById(R.id.cancelScanButton);
         cancelButton.setOnClickListener(
                 view -> {
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
+                    dismiss();
                 });
 
         AppDatabase db = Room.databaseBuilder(getContext(),
