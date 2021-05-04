@@ -54,7 +54,7 @@ public class FavoriteFragment extends Fragment {
 
         List<Item> favoriteItemsFull = new ArrayList<>();
         for (Item item: this.favoriteItems) {
-            int upc = item.upc;
+            String upc = item.upc;
             Item fullItem = itemDAO.loadItemByUPC(upc)[0];
             favoriteItemsFull.add(fullItem);
         }
