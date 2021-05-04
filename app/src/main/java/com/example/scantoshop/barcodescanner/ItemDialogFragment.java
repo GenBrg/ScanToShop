@@ -133,9 +133,13 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                             }
                             ((TextView) v.findViewById(R.id.scannedItemWarnings)).setText(Html.fromHtml(warningString));
                             ((TextView) v.findViewById(R.id.scannedItemWarnings)).setTextColor(Color.RED);
-                            String imageURL = foodHint.getString("image");
+                            String imageURL = "https://www.goodinfonet.com/images/no-pimage.jpg";
+                            if(foodHint.has("image")){
+                                imageURL = foodHint.getString("image");
+                            }
                             Picasso.with(v.getContext()).load(imageURL).into((ImageView) v.findViewById(R.id.scannedItemImage));
                             Button addButton = v.findViewById(R.id.addToShopListButton);
+                            String finalImageURL = imageURL;
                             addButton.setOnClickListener(
                                     v -> {
                                         ItemDAO itemDAO = db.itemDAO();
@@ -152,7 +156,7 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                                             item = new Item();
                                             item.upc = barcodeValue;
                                             item.iname = itemName;
-                                            item.image_path = imageURL;
+                                            item.image_path = finalImageURL;
                                             item.nutrient = nutrients.toString();
                                             item.health_label = contentsString;
                                             item.category = categoryString;

@@ -87,8 +87,8 @@ public class FavoriteFragment extends Fragment {
         // test add new CurrentShoppingListEntry
         CurrentShoppingListEntry newEntry = new CurrentShoppingListEntry("1", "1", 1);
         EntryDAO entryDAO = db.entryDAO();
-        entryDAO.insertEntry(newEntry);
-        Log.i("DATABASE", "new entry inserted");
+//        entryDAO.insertEntry(newEntry);
+//        Log.i("DATABASE", "new entry inserted");
 
         final FavoriteListAdapter currentfavListAdapter = new FavoriteListAdapter(fullList, entryDAO);
 
