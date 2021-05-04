@@ -36,10 +36,7 @@ public class ShoplistFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_shoplist, container, false);
 
-        AppDatabase db = Room.databaseBuilder(requireContext(),
-                AppDatabase.class, "MyDatabase")
-                .createFromAsset("database/scan2shopDB.db")
-                .allowMainThreadQueries().build();
+        AppDatabase db = AppDatabase.getInstance(requireContext());
         ProfileDAO profileDao = db.profileDAO();
         ItemDAO itemDAO = db.itemDAO();
         EntryDAO entryDAO = db.entryDAO();

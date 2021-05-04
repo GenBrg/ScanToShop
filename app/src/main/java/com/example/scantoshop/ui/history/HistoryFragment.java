@@ -32,30 +32,12 @@ public class HistoryFragment extends Fragment {
     private static final int SPAN_COUNT = 1;
     private int uid = 1; // default user
 
-    private HistoryViewModel historyViewModel;
-    private Button btn1;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-//        historyViewModel =
-//                ViewModelProviders.of(this).get(HistoryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_history_new, container, false);
-//        btn1 = (Button) root.findViewById(R.id.button1);
-//        btn1.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent();
-//                intent.setClass(getActivity(), HistoryDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-        AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
-                AppDatabase.class, "MyDatabase")
-                .createFromAsset("database/scan2shopDB.db")
-                .allowMainThreadQueries().build();
+        AppDatabase db = AppDatabase.getInstance(getContext());
         ItemDAO itemDAO = db.itemDAO();
 
         this.historyList1 = itemDAO.loadHistoryByPID(1);

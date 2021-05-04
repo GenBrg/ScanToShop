@@ -28,10 +28,7 @@ public class NutritionActivity extends AppCompatActivity {
 //        final TextView textView = findViewById(R.id.textview2);
 //        textView.setText("nutrition");
 
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "MyDatabase")
-                .createFromAsset("database/scan2shopDB.db")
-                .allowMainThreadQueries().build();
+        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
         ProfileDAO profileDao = db.profileDAO();
         Profile user = profileDao.loadAllProfiles()[0];
 

@@ -37,10 +37,7 @@ public class PersonalizeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_personalize, container, false);
 //        final TextView textView = root.findViewById(R.id.text_notifications);
         user_name = root.findViewById(R.id.user_name);
-        AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
-                AppDatabase.class, "MyDatabase")
-                .createFromAsset("database/scan2shopDB.db")
-                .allowMainThreadQueries().build();
+        AppDatabase db = AppDatabase.getInstance(getContext());
         ProfileDAO profileDao = db.profileDAO();
         Profile user = profileDao.loadAllProfiles()[0];
         user_name.setText(user.uname);

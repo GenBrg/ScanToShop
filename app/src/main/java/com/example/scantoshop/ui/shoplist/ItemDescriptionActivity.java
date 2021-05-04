@@ -35,12 +35,7 @@ public class ItemDescriptionActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         final String upc = b.getString("upc");
 
-        Log.e("123", upc);
-
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "MyDatabase")
-                .createFromAsset("database/scan2shopDB.db")
-                .allowMainThreadQueries().build();
+        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
         ItemDAO itemDAO = db.itemDAO();
         ItemProfileCrossRefDAO itemProfileCrossRefDAO =db.itemProfileCrossRefDAO();
@@ -56,10 +51,8 @@ public class ItemDescriptionActivity extends AppCompatActivity {
         itemImage = findViewById(R.id.item_description_image);
 
         if (isFav) {
-            Log.e("123", "fav");
             favButton.setText("Unfavorite");
         } else {
-            Log.e("123", "unfav");
             favButton.setText("Favorite");
         }
 
@@ -77,6 +70,4 @@ public class ItemDescriptionActivity extends AppCompatActivity {
             isFav = !isFav;
         });
     }
-
-
 }

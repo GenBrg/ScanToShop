@@ -70,10 +70,7 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                     dismiss();
                 });
 
-        AppDatabase db = Room.databaseBuilder(getContext(),
-                AppDatabase.class, "MyDatabase")
-                .createFromAsset("database/scan2shopDB.db")
-                .allowMainThreadQueries().build();
+        AppDatabase db = AppDatabase.getInstance(getContext());
         ProfileDAO profileDao = db.profileDAO();
         Profile user = profileDao.loadAllProfiles()[0];
         // Request a string response from the provided URL.

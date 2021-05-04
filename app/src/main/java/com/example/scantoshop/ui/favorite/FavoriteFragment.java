@@ -52,10 +52,7 @@ public class FavoriteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_favorite, container, false);
-        AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
-                AppDatabase.class, "MyDatabase")
-                .createFromAsset("database/scan2shopDB.db")
-                .allowMainThreadQueries().build();
+        AppDatabase db = AppDatabase.getInstance(getActivity().getApplicationContext());
         ItemDAO itemDAO = db.itemDAO();
         this.favoriteItems = itemDAO.loadItemByUID(1);
         Log.i("ITEMS", ""+this.favoriteItems.length);
