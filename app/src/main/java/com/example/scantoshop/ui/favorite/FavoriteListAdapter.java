@@ -3,6 +3,8 @@ package com.example.scantoshop.ui.favorite;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import com.example.scantoshop.DAO.EntryDAO;
 import com.example.scantoshop.Entity.CurrentShoppingListEntry;
 import com.example.scantoshop.Entity.Item;
 import com.example.scantoshop.R;
+import com.example.scantoshop.ui.shoplist.ItemDescriptionActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +46,7 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
             insertButton = itemView.findViewById(R.id.fav_insert_button);
             category = itemView.findViewById(R.id.fav_category);
             itemName = itemView.findViewById(R.id.fav_name);
-
+            itemImage = itemView.findViewById(R.id.fav_imageView);
         }
     }
 
@@ -70,6 +74,14 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
         });
         holder.category.setText(String.valueOf(item.category));
         holder.itemName.setText(item.iname);
+        Picasso.with(context).load(item.image_path).placeholder(R.drawable.no_image_available).into(holder.itemImage);
+        holder.itemImage.setOnClickListener(v->{
+            Intent intent = new Intent(context, ItemDescriptionActivity.class);
+            Bundle b = new Bundle();
+            b.putString("upc", item.upc);
+            intent.putExtras(b);
+            context.startActivity(intent);
+        });
     }
 
     @Override

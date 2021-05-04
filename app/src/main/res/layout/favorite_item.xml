@@ -7,11 +7,19 @@
     app:cardCornerRadius="5dp"
     android:id="@+id/favorite_item_cardview">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/fav_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/fav_imageView"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_margin="5dp"
+            app:srcCompat="@drawable/ic_star_24px"
+            android:elevation="-1dp"/>
 
         <TextView
             android:id="@+id/fav_name"
@@ -23,20 +31,18 @@
             android:id="@+id/fav_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/fav_name"
             android:text="TextView" />
 
-        <ImageView
-            android:id="@+id/fav_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_star_24px" />
+
 
         <Button
             android:id="@+id/fav_insert_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Insert to shopping list" />
+            android:layout_below="@id/fav_imageView"
+            android:text="Add To Cart" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
