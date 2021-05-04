@@ -10,4 +10,5 @@ import com.example.scantoshop.Entity.*;
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ProfileDAO profileDAO();
     public abstract ItemDAO itemDAO();
+    public abstract EntryDAO entryDAO();
 }
