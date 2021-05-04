@@ -201,11 +201,10 @@
         android:layout_height="wrap_content"
         android:text="TextView" />
 
-    <LinearLayout
-        android:id="@+id/outermost"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fav_recycle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        android:layout_height="match_parent" />
 
 
     <!--    <TextView-->
