@@ -1,5 +1,6 @@
 package com.example.scantoshop.ui.shoplist;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.List;
 public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShoppingListAdapter.ViewHolder> {
     private List<ShoppingItem> shoppingList = new ArrayList<>();
     private Context context;
+    private View itemView;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageButton upButton, downButton, deleteButton;
@@ -51,7 +53,8 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.shopping_item, parent, false));
+        itemView = LayoutInflater.from(context).inflate(R.layout.shopping_item, parent, false);
+        return new ViewHolder(itemView);
     }
 
     @Override
@@ -70,6 +73,10 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
 
         holder.quantity.setText(String.valueOf(item.getQuantity()));
         holder.itemImage.setText(item.getName());
+
+        holder.itemImage.setOnClickListener(v->{
+            ItemDescriptionDialog.showItemDialog(context, item);
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.scantoshop.ui.history;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scantoshop.R;
+import com.example.scantoshop.ui.shoplist.ItemDescriptionDialog;
 import com.example.scantoshop.ui.shoplist.ShoppingItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryShoppingListDetailAdapter extends RecyclerView.Adapter<HistoryShoppingListDetailAdapter.ViewHolder> {
-    List<ShoppingItem> shoppingItems = new ArrayList<>();
+    private List<ShoppingItem> shoppingItems = new ArrayList<>();
+    private Context context;
+    private View itemView;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView itemImage;
@@ -32,7 +36,9 @@ public class HistoryShoppingListDetailAdapter extends RecyclerView.Adapter<Histo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new HistoryShoppingListDetailAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_history_item_detail, parent, false));
+        context = parent.getContext();
+        itemView = LayoutInflater.from(context).inflate(R.layout.shopping_history_item_detail, parent, false);
+        return new HistoryShoppingListDetailAdapter.ViewHolder(itemView);
     }
 
     @Override
@@ -40,6 +46,9 @@ public class HistoryShoppingListDetailAdapter extends RecyclerView.Adapter<Histo
         ShoppingItem item = shoppingItems.get(position);
 
         holder.quantity.setText(String.valueOf(item.getQuantity()));
+        holder.itemImage.setOnClickListener(v->{
+            ItemDescriptionDialog.showItemDialog(context, item);
+        });
     }
 
     @Override
