@@ -19,24 +19,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.scantoshop.DAO.EntryDAO;
+import com.example.scantoshop.DAO.HistoryDAO;
 import com.example.scantoshop.DAO.ItemDAO;
 import com.example.scantoshop.DAO.ProfileDAO;
 import com.example.scantoshop.Entity.CurrentShoppingListEntry;
 import com.example.scantoshop.Entity.Item;
+import com.example.scantoshop.Entity.ItemHistoryCrossRef;
+import com.example.scantoshop.Entity.PurchaseHistory;
 import com.example.scantoshop.R;
 import com.example.scantoshop.util.AppDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShoppingListAdapter.ViewHolder> {
     private List<CurrentShoppingListEntry> shoppingList = new ArrayList<>();
     private Context context;
     private View itemView;
-    private ProfileDAO profileDao;
-    private ItemDAO itemDAO;
-    private EntryDAO entryDAO;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageButton upButton, downButton, deleteButton;
@@ -53,16 +54,13 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
         }
     }
 
-    public CurrentShoppingListAdapter(ProfileDAO profileDao, ItemDAO itemDAO, EntryDAO entryDAO) {
-        this.profileDao = profileDao;
-        this.itemDAO = itemDAO;
-        this.entryDAO = entryDAO;
+    public CurrentShoppingListAdapter(Context context) {
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext();
         itemView = LayoutInflater.from(context).inflate(R.layout.shopping_item, parent, false);
 
         return new ViewHolder(itemView);
@@ -71,7 +69,7 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final CurrentShoppingListEntry entry = shoppingList.get(position);
-        Item item = itemDAO.loadItemByUPC(entry.upc)[0];
+        Item item = AppDatabase.getInstance(context).itemDAO().loadItemByUPC(entry.upc)[0];
 
         holder.upButton.setOnClickListener(v->{
             setQuantity(entry, entry.quantity + 1);
@@ -84,7 +82,9 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
         });
 
         holder.quantity.setText(String.valueOf(entry.quantity));
-        Picasso.with(context).load(item.image_path).into(holder.itemImage);
+
+        Picasso.with(context).load(item.image_path).placeholder(R.drawable.no_image_available).into(holder.itemImage);
+
         holder.itemImage.setOnClickListener(v->{
             Intent intent = new Intent(context, ItemDescriptionActivity.class);
             Bundle b = new Bundle();
@@ -109,23 +109,37 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
             return;
         }
         entry.quantity = quantity;
-        entryDAO.updateEntry(entry);
+        AppDatabase.getInstance(context).entryDAO().updateEntry(entry);
 
         notifyDataSetChanged();
     }
 
     private void deleteItem(int position) {
         CurrentShoppingListEntry entry = shoppingList.get(position);
-        entryDAO.deleteEntries(entry);
+        AppDatabase.getInstance(context).entryDAO().deleteEntries(entry);
 
         shoppingList.remove(position);
         notifyDataSetChanged();
     }
 
     void commitShoppingList() {
-        // TODO Commit to Database
+        if (shoppingList.size() == 0) {
+            Toast.makeText(context, "Shopping list empty!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Toast.makeText(context, "Successfully commit shopping list!", Toast.LENGTH_SHORT).show();
+        AppDatabase db = AppDatabase.getInstance(context);
+        EntryDAO entryDAO = db.entryDAO();
+        HistoryDAO historyDAO = db.historyDAO();
+
+        PurchaseHistory purchaseHistory = new PurchaseHistory("1", new Date().toString());
+        int pid = (int)historyDAO.insertPurchaseHistory(purchaseHistory);
+
+        for (CurrentShoppingListEntry entry : shoppingList) {
+            historyDAO.insertItemHistoryCrossRef(new ItemHistoryCrossRef(entry.upc, pid, entry.quantity));
+        }
+
+        entryDAO.deleteAllEntries();
         shoppingList = new ArrayList<>();
         notifyDataSetChanged();
     }

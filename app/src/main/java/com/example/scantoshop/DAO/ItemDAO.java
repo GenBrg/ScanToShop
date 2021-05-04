@@ -27,10 +27,4 @@ public interface ItemDAO {
 
     @Query("SELECT * FROM itemprofilecrossref WHERE uid == :uid")
     public Item[] loadItemByUID(int uid);
-
-    @Query("SELECT * FROM itemhistorycrossref WHERE pid == :pid")
-    public Item[] loadHistoryByPID(int pid);
-
-    @Query("SELECT purchase_date FROM purchasehistory WHERE pid == :pid")
-    public String loadDateByPID(int pid);
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,16 +34,15 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
         private Button deleteButton;
         private Button insertButton;
         private TextView category;
-        // TODO Load image
-//        private ImageView itemImage;
+        private ImageView itemImage;
         private TextView itemName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //deleteButton = itemView.findViewById(R.id.fav_del_button);
             insertButton = itemView.findViewById(R.id.fav_insert_button);
             category = itemView.findViewById(R.id.fav_category);
             itemName = itemView.findViewById(R.id.fav_name);
+
         }
     }
 

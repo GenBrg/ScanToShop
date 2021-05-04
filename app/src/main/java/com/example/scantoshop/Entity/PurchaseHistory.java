@@ -7,7 +7,7 @@ import java.util.Date;
  */
 @Entity
 public class PurchaseHistory {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int pid;
 
     @ColumnInfo(name = "user_create_id")
@@ -15,4 +15,9 @@ public class PurchaseHistory {
 
     @ColumnInfo(name = "purchase_date")
     public String purchase_date;
+
+    public PurchaseHistory(String userCreateId, String purchase_date) {
+        this.userCreateId = userCreateId;
+        this.purchase_date = purchase_date;
+    }
 }

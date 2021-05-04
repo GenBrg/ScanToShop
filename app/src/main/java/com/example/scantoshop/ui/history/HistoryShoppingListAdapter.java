@@ -10,8 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.scantoshop.Entity.ItemHistoryCrossRef;
+import com.example.scantoshop.Entity.PurchaseHistory;
 import com.example.scantoshop.R;
-import com.example.scantoshop.ui.shoplist.ShoppingItem;
+import com.example.scantoshop.util.AppDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,24 +21,11 @@ import java.util.Date;
 import java.util.List;
 
 public class HistoryShoppingListAdapter extends RecyclerView.Adapter<HistoryShoppingListAdapter.ViewHolder> {
-    private List<ShoppingHistory> shoppingHistory = new ArrayList<>();
+    private List<PurchaseHistory> shoppingHistory = new ArrayList<>();
     private Context context;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public HistoryShoppingListAdapter() {
-        List<ShoppingItem> history1, history2;
-        history1 = new ArrayList<>();
-        history2 = new ArrayList<>();
-
-        history1.add(new ShoppingItem("Apple", 3));
-        history1.add(new ShoppingItem("Orange", 3));
-        history1.add(new ShoppingItem("Banana", 4));
-
-        history2.add(new ShoppingItem("bbb", 5));
-
-        shoppingHistory.add(new ShoppingHistory(history1, new Date()));
-        shoppingHistory.add(new ShoppingHistory(history2, new Date()));
-    }
+    public HistoryShoppingListAdapter() {}
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView historyTitle;
@@ -62,14 +51,20 @@ public class HistoryShoppingListAdapter extends RecyclerView.Adapter<HistoryShop
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ShoppingHistory history = shoppingHistory.get(position);
+        PurchaseHistory history = shoppingHistory.get(position);
+        List<ItemHistoryCrossRef> items = AppDatabase.getInstance(context).historyDAO().loadItemHistoryCrossRefPID(history.pid);
 
-        holder.historyTitle.setText(dateFormat.format(history.getDate()) + " Total: " + history.size());
-        ((HistoryShoppingListDetailAdapter)holder.historyDetailView.getAdapter()).setShoppingItems(history.getShoppingItems());
+        holder.historyTitle.setText(dateFormat.format(new Date(history.purchase_date)) + " Total: " + items.size());
+        ((HistoryShoppingListDetailAdapter)holder.historyDetailView.getAdapter()).setShoppingItems(items);
     }
 
     @Override
     public int getItemCount() {
         return shoppingHistory.size();
+    }
+
+    public void setShoppingHistory(List<PurchaseHistory> shoppingHistory) {
+        this.shoppingHistory = shoppingHistory;
+        notifyDataSetChanged();
     }
 }

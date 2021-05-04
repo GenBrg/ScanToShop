@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 8,
-    "identityHash": "00cba7d0ec421f444d9d6c25091123aa",
+    "identityHash": "c16d191eca695bf81c28adfca22d2b76",
     "entities": [
       {
         "tableName": "Profile",
@@ -106,7 +106,7 @@
       },
       {
         "tableName": "PurchaseHistory",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pid` INTEGER NOT NULL, `user_create_id` TEXT, `purchase_date` TEXT, PRIMARY KEY(`pid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_create_id` TEXT, `purchase_date` TEXT)",
         "fields": [
           {
             "fieldPath": "pid",
@@ -131,7 +131,7 @@
           "columnNames": [
             "pid"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -238,7 +238,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '00cba7d0ec421f444d9d6c25091123aa')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c16d191eca695bf81c28adfca22d2b76')"
     ]
   }
 }

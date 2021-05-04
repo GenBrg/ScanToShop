@@ -14,6 +14,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ProfileDAO profileDAO();
     public abstract ItemDAO itemDAO();
     public abstract EntryDAO entryDAO();
+    public abstract HistoryDAO historyDAO();
     public abstract ItemProfileCrossRefDAO itemProfileCrossRefDAO();
 
     public static AppDatabase getInstance(Context context) {

@@ -56,7 +56,7 @@ public class ItemDescriptionActivity extends AppCompatActivity {
             favButton.setText("Favorite");
         }
 
-        Picasso.with(getApplicationContext()).load(item.image_path).into(itemImage);
+        Picasso.with(getApplicationContext()).load(item.image_path).placeholder(R.drawable.no_image_available).into(itemImage);
         itemName.setText(item.iname);
 
         favButton.setOnClickListener(v -> {

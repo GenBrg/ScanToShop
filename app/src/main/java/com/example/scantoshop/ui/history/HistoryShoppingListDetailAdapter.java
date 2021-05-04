@@ -1,6 +1,9 @@
 package com.example.scantoshop.ui.history;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +13,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.scantoshop.Entity.Item;
+import com.example.scantoshop.Entity.ItemHistoryCrossRef;
 import com.example.scantoshop.R;
+import com.example.scantoshop.ui.shoplist.ItemDescriptionActivity;
 import com.example.scantoshop.ui.shoplist.ShoppingItem;
+import com.example.scantoshop.util.AppDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryShoppingListDetailAdapter extends RecyclerView.Adapter<HistoryShoppingListDetailAdapter.ViewHolder> {
-    private List<ShoppingItem> shoppingItems = new ArrayList<>();
+    private List<ItemHistoryCrossRef> shoppingItems = new ArrayList<>();
     private Context context;
     private View itemView;
 
@@ -42,11 +50,17 @@ public class HistoryShoppingListDetailAdapter extends RecyclerView.Adapter<Histo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ShoppingItem item = shoppingItems.get(position);
+        ItemHistoryCrossRef itemHistoryCrossRef = shoppingItems.get(position);
+        Item item = AppDatabase.getInstance(context).itemDAO().loadItemByUPC(itemHistoryCrossRef.upc)[0];
+        holder.quantity.setText(String.valueOf(itemHistoryCrossRef.quantity));
+        Picasso.with(context).load(item.image_path).placeholder(R.drawable.no_image_available).into(holder.itemImage);
 
-        holder.quantity.setText(String.valueOf(item.getQuantity()));
         holder.itemImage.setOnClickListener(v->{
-            // TODO item description
+            Intent intent = new Intent(context, ItemDescriptionActivity.class);
+            Bundle b = new Bundle();
+            b.putString("upc", itemHistoryCrossRef.upc);
+            intent.putExtras(b);
+            context.startActivity(intent);
         });
     }
 
@@ -55,8 +69,8 @@ public class HistoryShoppingListDetailAdapter extends RecyclerView.Adapter<Histo
         return shoppingItems.size();
     }
 
-    public void setShoppingItems(List<ShoppingItem> shoppingItems) {
-        this.shoppingItems = shoppingItems;
+    public void setShoppingItems(List<ItemHistoryCrossRef> items) {
+        this.shoppingItems = items;
         notifyDataSetChanged();
     }
 }

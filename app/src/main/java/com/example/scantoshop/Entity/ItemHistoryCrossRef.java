@@ -12,4 +12,10 @@ public class ItemHistoryCrossRef {
     public String upc;
     public int pid;
     public int quantity;
+
+    public ItemHistoryCrossRef(@NonNull String upc, int pid, int quantity) {
+        this.upc = upc;
+        this.pid = pid;
+        this.quantity = quantity;
+    }
 }

@@ -22,9 +22,13 @@ import androidx.room.Room;
 import com.example.scantoshop.DAO.EntryDAO;
 import com.example.scantoshop.DAO.ItemDAO;
 import com.example.scantoshop.DAO.ProfileDAO;
+import com.example.scantoshop.Entity.CurrentShoppingListEntry;
+import com.example.scantoshop.Entity.ProfileWithCurrentShoppingListEntry;
 import com.example.scantoshop.R;
 import com.example.scantoshop.util.AppDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.Inflater;
 
 public class ShoplistFragment extends Fragment {
@@ -38,10 +42,14 @@ public class ShoplistFragment extends Fragment {
 
         AppDatabase db = AppDatabase.getInstance(requireContext());
         ProfileDAO profileDao = db.profileDAO();
-        ItemDAO itemDAO = db.itemDAO();
-        EntryDAO entryDAO = db.entryDAO();
-        final CurrentShoppingListAdapter currentShoppingListAdapter = new CurrentShoppingListAdapter(profileDao, itemDAO, entryDAO);
-        currentShoppingListAdapter.setShoppingList(profileDao.getShoppingList().get(0).currentShoppingList);
+
+        final CurrentShoppingListAdapter currentShoppingListAdapter = new CurrentShoppingListAdapter(requireContext());
+        List<CurrentShoppingListEntry> shoppingList = new ArrayList<>();
+        List<ProfileWithCurrentShoppingListEntry> profileWithCurrentShoppingListEntry = profileDao.getShoppingList();
+        if (profileWithCurrentShoppingListEntry.size() > 0) {
+            shoppingList = profileWithCurrentShoppingListEntry.get(0).currentShoppingList;
+        }
+        currentShoppingListAdapter.setShoppingList(shoppingList);
         itemView = root.findViewById(R.id.shop_list);
         itemView.setAdapter(currentShoppingListAdapter);
         itemView.setLayoutManager(new GridLayoutManager(requireContext(), SPAN_COUNT));
