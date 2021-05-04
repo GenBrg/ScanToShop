@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="5dp"
+    android:id="@+id/history_item_cardview">
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical">
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/his_date"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_span="6"
+            android:gravity="center"
+            android:text=" 2021-02-21"
+            android:textSize="24sp"
+            android:textStyle="bold"></TextView>
+    </TableRow>
+    <TableRow
+        android:layout_height="match_parent"
+        android:id="@+id/his_layout"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+
+            app:cardCornerRadius="4dp">
+
+
+            <ImageView
+                android:id="@+id/his_imageView"
+                android:layout_width="86dp"
+                android:layout_height="86dp"
+                android:contentDescription="@string/title_shoplist"
+                android:src="@drawable/orange" />
+
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/his_name"
+            android:layout_width="111dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Orange"
+            android:textSize="18sp"></TextView>
+
+        <TextView
+            android:id="@+id/his_category"
+            android:layout_width="97dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="3"
+            android:textSize="18sp"></TextView>
+
+        <Button
+            android:id="@+id/add_to_fav_button"
+            android:layout_width="108dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector"
+            android:gravity="center"
+            android:text="Like" />
+
+    </TableRow>
+</TableLayout>
+
+</androidx.cardview.widget.CardView>
