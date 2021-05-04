@@ -76,8 +76,6 @@ public class FavoriteFragment extends Fragment {
             categorizedItems.get(item.category).add(item);
         }
         Log.i("myTag", categories);
-        TextView textView = (TextView)root.findViewById(R.id.textView8);
-        textView.setText(categories);
 
         for (Map.Entry<String, List<Item>> entry: categorizedItems.entrySet()) {
             fullList.addAll(entry.getValue());
@@ -88,12 +86,6 @@ public class FavoriteFragment extends Fragment {
         itemView = root.findViewById(R.id.fav_recycle);
         itemView.setAdapter(currentfavListAdapter);
         itemView.setLayoutManager(new GridLayoutManager(requireContext(), SPAN_COUNT));
-
-        //submitButton = root.findViewById(R.id.submit_shoppinglist_button);
-
-        //submitButton.setOnClickListener(v->{
-        //    currentShoppingListAdapter.commitShoppingList();
-        //});
 
         return root;
     }
