@@ -1,0 +1,206 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 6,
+    "identityHash": "6bd27531322c9f1b53c2b1b774d5b086",
+    "entities": [
+      {
+        "tableName": "Profile",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` TEXT NOT NULL, `user_name` TEXT, `allergy_1` INTEGER, `allergy_2` INTEGER, `nutrient_1` REAL, `nutrient_2` REAL, PRIMARY KEY(`uid`))",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uname",
+            "columnName": "user_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "allergy_1",
+            "columnName": "allergy_1",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "allergy_2",
+            "columnName": "allergy_2",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nutrient_1",
+            "columnName": "nutrient_1",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nutrient_2",
+            "columnName": "nutrient_2",
+            "affinity": "REAL",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Item",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upc` TEXT NOT NULL, `item_name` TEXT, `item_image` TEXT, `nutrient` TEXT, `health_label` TEXT, `category` TEXT, PRIMARY KEY(`upc`))",
+        "fields": [
+          {
+            "fieldPath": "upc",
+            "columnName": "upc",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iname",
+            "columnName": "item_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "image_path",
+            "columnName": "item_image",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nutrient",
+            "columnName": "nutrient",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "health_label",
+            "columnName": "health_label",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "upc"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "PurchaseHistory",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pid` INTEGER NOT NULL, `user_create_id` TEXT, `purchase_date` TEXT, PRIMARY KEY(`pid`))",
+        "fields": [
+          {
+            "fieldPath": "pid",
+            "columnName": "pid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userCreateId",
+            "columnName": "user_create_id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "purchase_date",
+            "columnName": "purchase_date",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "pid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ItemHistoryCrossRef",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upc` INTEGER NOT NULL, `pid` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, PRIMARY KEY(`upc`, `pid`))",
+        "fields": [
+          {
+            "fieldPath": "upc",
+            "columnName": "upc",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pid",
+            "columnName": "pid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "upc",
+            "pid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ItemProfileCrossRef",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upc` INTEGER NOT NULL, `uid` TEXT NOT NULL, PRIMARY KEY(`upc`, `uid`))",
+        "fields": [
+          {
+            "fieldPath": "upc",
+            "columnName": "upc",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "upc",
+            "uid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6bd27531322c9f1b53c2b1b774d5b086')"
+    ]
+  }
+}

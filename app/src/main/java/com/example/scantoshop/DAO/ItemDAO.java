@@ -21,6 +21,7 @@ public interface ItemDAO {
 
     @Query("SELECT * FROM item WHERE upc == :upc")
     public Item[] loadItemByUPC(String upc);
+
     @Query("SELECT * FROM itemprofilecrossref WHERE uid == :uid")
     public Item[] loadItemByUID(int uid);
 }
