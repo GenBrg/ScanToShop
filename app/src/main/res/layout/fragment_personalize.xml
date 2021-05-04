@@ -11,7 +11,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="127dp">
+        android:layout_height="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="116dp">
+        android:layout_height="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,6 +52,7 @@
 
             <Button
                 android:id="@+id/allergy_button"
+                style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MODIFY" />
@@ -61,7 +62,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="131dp">
+        android:layout_height="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,6 +78,7 @@
 
             <Button
                 android:id="@+id/nutrition_button"
+                style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MODIFY" />
@@ -85,7 +87,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="102dp">
+        android:layout_height="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,6 +104,7 @@
 
             <Button
                 android:id="@+id/change_name_button"
+                style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CHANGE" />
