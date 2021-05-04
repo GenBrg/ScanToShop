@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="10dp">
+<ImageView
+    android:layout_width="40dp"
+    android:layout_height="60dp"
+    android:id="@+id/history_detail_item_image">
+</ImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/history_detail_item_quantity"
+        android:layout_below="@id/history_detail_item_image">
+    </TextView>
+</RelativeLayout>

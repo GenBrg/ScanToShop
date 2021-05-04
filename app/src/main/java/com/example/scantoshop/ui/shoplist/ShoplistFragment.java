@@ -29,16 +29,7 @@ public class ShoplistFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        shoplistViewModel =
-                ViewModelProviders.of(this).get(ShoplistViewModel.class);
         View root = inflater.inflate(R.layout.fragment_shoplist, container, false);
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        shoplistViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
         final CurrentShoppingListAdapter currentShoppingListAdapter = new CurrentShoppingListAdapter();
 
         itemView = root.findViewById(R.id.shop_list);

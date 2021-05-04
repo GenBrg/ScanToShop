@@ -13,39 +13,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scantoshop.R;
 
 public class HistoryFragment extends Fragment {
-
-    private HistoryViewModel historyViewModel;
-    private Button btn1;
-
+    private RecyclerView historyView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-//        historyViewModel =
-//                ViewModelProviders.of(this).get(HistoryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_history, container, false);
-        btn1 = (Button) root.findViewById(R.id.button1);
-        btn1.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), HistoryDetailActivity.class);
-                startActivity(intent);
-            }
-        });
 
-//        final TextView textView = root.findViewById(R.id.text_dashboard);
-//        historyViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        historyView = root.findViewById(R.id.history_list);
+        historyView.setAdapter(new HistoryShoppingListAdapter());
+        historyView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
         return root;
     }
 
