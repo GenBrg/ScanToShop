@@ -8,7 +8,7 @@
         <option name="disableWrapperSourceDistributionNotification" value="true" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="D:/gradle-6.7" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../gradle-6.7" />
         <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
