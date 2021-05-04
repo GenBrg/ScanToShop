@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.scantoshop.DAO.EntryDAO;
 import com.example.scantoshop.DAO.ItemDAO;
 import com.example.scantoshop.DAO.ProfileDAO;
 import com.example.scantoshop.Entity.CurrentShoppingListEntry;
@@ -160,14 +161,16 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                                         }
                                         boolean itemInList = false;
                                         for(CurrentShoppingListEntry entry: profileDao.getShoppingList().get(0).currentShoppingList){
-                                            if(entry.upc == barcodeValue){
+                                            if(entry.upc.equals(barcodeValue)){
                                                 entry.quantity++;
                                                 itemInList = true;
                                                 break;
                                             }
                                         }
+                                        EntryDAO entryDAO = db.entryDAO();
                                         if (!itemInList){
-                                            // Create a new entry
+                                            CurrentShoppingListEntry entry = new CurrentShoppingListEntry("1", barcodeValue, 1);
+                                            entryDAO.insertEntry(entry);
                                         }
                                         Intent intent = new Intent(getContext(), MainActivity.class);
                                         startActivity(intent);
