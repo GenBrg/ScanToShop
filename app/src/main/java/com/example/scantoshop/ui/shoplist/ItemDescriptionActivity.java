@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -58,6 +59,14 @@ public class ItemDescriptionActivity extends AppCompatActivity {
 
         Picasso.with(getApplicationContext()).load(item.image_path).placeholder(R.drawable.no_image_available).into(itemImage);
         itemName.setText(item.iname);
+        StringBuilder description = new StringBuilder();
+        description.append("<b> CATEGORY </b>");
+        description.append(String.format("<p> %s </P>", item.category));
+        description.append("<b> HEALTH LABEL </b>");
+        description.append(String.format("<p> %s </P>", item.health_label));
+        description.append("<b> NUTRIENT </b>");
+        description.append(String.format("<p> %s </P>", item.nutrient));
+        itemDescription.setText(Html.fromHtml(description.toString()));
 
         favButton.setOnClickListener(v -> {
             if (isFav) {

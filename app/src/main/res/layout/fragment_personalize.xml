@@ -116,7 +116,7 @@
                 android:layout_marginLeft="40dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Change my name" />
+                android:hint="Change my name" />
 
             <Button
                 android:id="@+id/change_name_button"
