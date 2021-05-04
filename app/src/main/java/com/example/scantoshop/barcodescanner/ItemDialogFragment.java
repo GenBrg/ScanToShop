@@ -160,14 +160,16 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                                             itemDAO.insertItems(item);
                                         }
                                         boolean itemInList = false;
+                                        EntryDAO entryDAO = db.entryDAO();
+
                                         for(CurrentShoppingListEntry entry: profileDao.getShoppingList().get(0).currentShoppingList){
                                             if(entry.upc.equals(barcodeValue)){
                                                 entry.quantity++;
+                                                entryDAO.insertEntry(entry);
                                                 itemInList = true;
                                                 break;
                                             }
                                         }
-                                        EntryDAO entryDAO = db.entryDAO();
                                         if (!itemInList){
                                             CurrentShoppingListEntry entry = new CurrentShoppingListEntry("1", barcodeValue, 1);
                                             entryDAO.insertEntry(entry);

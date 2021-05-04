@@ -9,7 +9,7 @@ public interface EntryDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertEntries(CurrentShoppingListEntry... entries);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertEntry(CurrentShoppingListEntry entry);
 
     @Update
