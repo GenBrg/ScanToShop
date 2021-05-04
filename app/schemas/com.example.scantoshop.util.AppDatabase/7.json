@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 7,
-    "identityHash": "253243541f4cbeda1798d18d0fb85bbb",
+    "identityHash": "00cba7d0ec421f444d9d6c25091123aa",
     "entities": [
       {
         "tableName": "Profile",
@@ -198,7 +198,7 @@
       },
       {
         "tableName": "CurrentShoppingListEntry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entryid` INTEGER NOT NULL, `uid` TEXT NOT NULL, `upc` TEXT NOT NULL, `quantity` INTEGER NOT NULL, PRIMARY KEY(`entryid`, `uid`, `upc`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entryid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` TEXT NOT NULL, `upc` TEXT NOT NULL, `quantity` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "entryid",
@@ -227,11 +227,9 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "entryid",
-            "uid",
-            "upc"
+            "entryid"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -240,7 +238,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '253243541f4cbeda1798d18d0fb85bbb')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '00cba7d0ec421f444d9d6c25091123aa')"
     ]
   }
 }

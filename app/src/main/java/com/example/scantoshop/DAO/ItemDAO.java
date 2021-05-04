@@ -7,6 +7,9 @@ public interface ItemDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertItems(Item... items);
 
+    @Insert
+    public void insertItem(Item item);
+
     @Update
     public void updateItems(Item... items);
 

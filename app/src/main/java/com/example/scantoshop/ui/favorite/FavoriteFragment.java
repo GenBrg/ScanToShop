@@ -21,8 +21,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.example.scantoshop.DAO.EntryDAO;
 import com.example.scantoshop.DAO.ItemDAO;
+import com.example.scantoshop.DAO.ItemProfileCrossRefDAO;
 import com.example.scantoshop.DAO.ProfileDAO;
+import com.example.scantoshop.Entity.CurrentShoppingListEntry;
 import com.example.scantoshop.Entity.Item;
 import com.example.scantoshop.Entity.Profile;
 import com.example.scantoshop.R;
@@ -86,6 +89,12 @@ public class FavoriteFragment extends Fragment {
         itemView = root.findViewById(R.id.fav_recycle);
         itemView.setAdapter(currentfavListAdapter);
         itemView.setLayoutManager(new GridLayoutManager(requireContext(), SPAN_COUNT));
+
+        // test add new CurrentShoppingListEntry
+        CurrentShoppingListEntry newEntry = new CurrentShoppingListEntry("1", "1", 1);
+        EntryDAO entryDAO = db.entryDAO();
+        entryDAO.insertEntry(newEntry);
+        Log.i("DATABASE", "new entry inserted");
 
         return root;
     }

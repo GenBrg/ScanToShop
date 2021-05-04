@@ -12,4 +12,10 @@ public class ItemProfileCrossRef {
     public String upc;
     @NonNull
     public String uid;
+
+
+    public ItemProfileCrossRef(String upc, String uid) {
+        this.upc = upc;
+        this.uid = uid;
+    }
 }

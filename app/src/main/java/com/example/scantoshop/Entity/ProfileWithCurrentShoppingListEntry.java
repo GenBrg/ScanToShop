@@ -10,7 +10,7 @@ public class ProfileWithCurrentShoppingListEntry {
     public Profile profile;
     @Relation(
             parentColumn = "uid",
-            entityColumn = "entryid"
+            entityColumn = "uid"
     )
     public List<CurrentShoppingListEntry> currentShoppingList;
 }
