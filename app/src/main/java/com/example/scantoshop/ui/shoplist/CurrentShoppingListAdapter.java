@@ -6,28 +6,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import com.example.scantoshop.DAO.EntryDAO;
+import com.example.scantoshop.DAO.ItemDAO;
+import com.example.scantoshop.DAO.ProfileDAO;
+import com.example.scantoshop.Entity.CurrentShoppingListEntry;
+import com.example.scantoshop.Entity.Item;
 import com.example.scantoshop.R;
+import com.example.scantoshop.util.AppDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShoppingListAdapter.ViewHolder> {
-    private List<ShoppingItem> shoppingList = new ArrayList<>();
+    private List<CurrentShoppingListEntry> shoppingList = new ArrayList<>();
     private Context context;
     private View itemView;
+    private AppDatabase db;
+    private ProfileDAO profileDao;
+    private ItemDAO itemDAO;
+    private EntryDAO entryDAO;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageButton upButton, downButton, deleteButton;
         private TextView quantity;
-        // TODO Load image
-//        private ImageView itemImage;
-        private TextView itemImage;
+        private ImageView itemImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -35,18 +46,11 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
             downButton = itemView.findViewById(R.id.remove_item_button);
             deleteButton = itemView.findViewById(R.id.item_delete);
             quantity = itemView.findViewById(R.id.item_quantity);
-            // TODO Load image
-//            itemImage.findViewById(R.id.item_img);
-            itemImage = itemView.findViewById(R.id.favorite_img);
+            itemImage.findViewById(R.id.item_img);
         }
     }
 
     public CurrentShoppingListAdapter() {
-        // TODO Load initial shopping list from database
-        shoppingList.add(new ShoppingItem("Apple", 3));
-        shoppingList.add(new ShoppingItem("Banana", 1));
-        shoppingList.add(new ShoppingItem("Strawberry", 4));
-        shoppingList.add(new ShoppingItem("Watermelon", 5));
     }
 
     @NonNull
@@ -54,28 +58,37 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         itemView = LayoutInflater.from(context).inflate(R.layout.shopping_item, parent, false);
+        db = Room.databaseBuilder(context,
+                AppDatabase.class, "MyDatabase")
+                .createFromAsset("database/scan2shopDB.db")
+                .allowMainThreadQueries().build();
+        profileDao = db.profileDAO();
+        itemDAO = db.itemDAO();
+
+        shoppingList = profileDao.getShoppingList().get(0).currentShoppingList;
+
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final ShoppingItem item = shoppingList.get(position);
+        final CurrentShoppingListEntry entry = shoppingList.get(position);
+        Item item = itemDAO.loadItemByUPC(entry.upc)[0];
 
         holder.upButton.setOnClickListener(v->{
-            setQuantity(item, item.getQuantity() + 1);
+            setQuantity(entry, entry.quantity + 1);
         });
         holder.downButton.setOnClickListener(v->{
-            setQuantity(item, item.getQuantity() - 1);
+            setQuantity(entry, entry.quantity - 1);
         });
         holder.deleteButton.setOnClickListener(v->{
             deleteItem(position);
         });
 
-        holder.quantity.setText(String.valueOf(item.getQuantity()));
-        holder.itemImage.setText(item.getName());
-
+        holder.quantity.setText(String.valueOf(entry.quantity));
+        Picasso.with(context).load(item.image_path).into(holder.itemImage);
         holder.itemImage.setOnClickListener(v->{
-            ItemDescriptionDialog.showItemDialog(context, item);
+//            ItemDescriptionDialog.showItemDialog(context, item);
         });
     }
 
@@ -84,24 +97,21 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
         return shoppingList.size();
     }
 
-    private void setQuantity(ShoppingItem item, int quantity) {
+    private void setQuantity(CurrentShoppingListEntry entry, int quantity) {
         if (quantity <= 0) {
             return;
         }
-        item.setQuantity(quantity);
-        // TODO Commit to database
+        entry.quantity = quantity;
+        entryDAO.updateEntry(entry);
+
         notifyDataSetChanged();
     }
 
     private void deleteItem(int position) {
-        // TODO Delete in database
-        shoppingList.remove(position);
-        notifyDataSetChanged();
-    }
+        CurrentShoppingListEntry entry = shoppingList.get(position);
+        entryDAO.deleteEntries(entry);
 
-    private void AddItem(ShoppingItem item) {
-        shoppingList.add(item);
-        // TODO Commit to Database
+        shoppingList.remove(position);
         notifyDataSetChanged();
     }
 

@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +18,6 @@ import com.example.scantoshop.DAO.EntryDAO;
 import com.example.scantoshop.Entity.CurrentShoppingListEntry;
 import com.example.scantoshop.Entity.Item;
 import com.example.scantoshop.R;
-import com.example.scantoshop.ui.shoplist.ShoppingItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,33 +116,5 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
         alert.setTitle("Success");
         alert.show();
         Log.i("DATABASE", "insert entry in adapter");
-    }
-
-    private void setQuantity(ShoppingItem item, int quantity) {
-        if (quantity <= 0) {
-            return;
-        }
-        item.setQuantity(quantity);
-        // TODO Commit to database
-        notifyDataSetChanged();
-    }
-
-    private void deleteItem(int position) {
-        // TODO Delete in database
-        favList.remove(position);
-        notifyDataSetChanged();
-    }
-
-    private void AddItem(Item item) {
-        favList.add(item);
-        // TODO Commit to Database
-        notifyDataSetChanged();
-    }
-
-    void commitShoppingList() {
-        // TODO Commit to Database
-        Toast.makeText(context, "Successfully commit fav list!", Toast.LENGTH_SHORT).show();
-        favList = new ArrayList<>();
-        notifyDataSetChanged();
     }
 }

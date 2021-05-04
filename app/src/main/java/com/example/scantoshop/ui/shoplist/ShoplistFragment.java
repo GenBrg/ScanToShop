@@ -22,7 +22,6 @@ import com.example.scantoshop.R;
 import java.util.zip.Inflater;
 
 public class ShoplistFragment extends Fragment {
-    private ShoplistViewModel shoplistViewModel;
     private RecyclerView itemView;
     private Button submitButton;
     private static final int SPAN_COUNT = 3;

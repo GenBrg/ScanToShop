@@ -11,28 +11,19 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
-<!--        <ImageView-->
-<!--            android:layout_width="90dp"-->
-<!--            android:layout_height="90dp"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:id="@+id/item_img">-->
-
-<!--        </ImageView>-->
-
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_centerHorizontal="true"
-            android:id="@+id/favorite_img"
-            android:text="Item"
-            >
-        </TextView>
+            android:id="@+id/item_img">
+
+        </ImageView>
 
         <ImageButton
             android:id="@+id/remove_item_button"
             android:layout_width="39dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/favorite_img"
+            android:layout_below="@id/item_img"
 
             app:srcCompat="@android:drawable/arrow_down_float" />
 
@@ -40,7 +31,7 @@
             android:id="@+id/item_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/favorite_img"
+            android:layout_below="@id/item_img"
             android:layout_centerInParent="true"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="6dp"
@@ -53,7 +44,7 @@
             android:id="@+id/add_item_button"
             android:layout_width="33dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/favorite_img"
+            android:layout_below="@id/item_img"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="13dp"
             android:layout_marginTop="0dp"

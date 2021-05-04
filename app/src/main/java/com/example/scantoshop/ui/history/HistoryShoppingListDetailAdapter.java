@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scantoshop.R;
-import com.example.scantoshop.ui.shoplist.ItemDescriptionDialog;
 import com.example.scantoshop.ui.shoplist.ShoppingItem;
 
 import java.util.ArrayList;
@@ -47,7 +46,7 @@ public class HistoryShoppingListDetailAdapter extends RecyclerView.Adapter<Histo
 
         holder.quantity.setText(String.valueOf(item.getQuantity()));
         holder.itemImage.setOnClickListener(v->{
-            ItemDescriptionDialog.showItemDialog(context, item);
+            // TODO item description
         });
     }
 
