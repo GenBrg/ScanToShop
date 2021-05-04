@@ -7,9 +7,6 @@ import com.example.scantoshop.Entity.*;
 @Dao
 public interface ItemProfileCrossRefDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertItemProfileCrossRefs(ItemProfileCrossRef... ipCrosses);
-
-    @Insert
     public void insertItemProfileCrossRef(ItemProfileCrossRef ipCross);
 
     @Update

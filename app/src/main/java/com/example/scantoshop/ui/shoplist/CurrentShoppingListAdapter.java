@@ -1,7 +1,10 @@
 package com.example.scantoshop.ui.shoplist;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +86,11 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
         holder.quantity.setText(String.valueOf(entry.quantity));
         Picasso.with(context).load(item.image_path).into(holder.itemImage);
         holder.itemImage.setOnClickListener(v->{
-//            TODO item description
+            Intent intent = new Intent(context, ItemDescriptionActivity.class);
+            Bundle b = new Bundle();
+            b.putString("upc", entry.upc);
+            intent.putExtras(b);
+            context.startActivity(intent);
         });
     }
 

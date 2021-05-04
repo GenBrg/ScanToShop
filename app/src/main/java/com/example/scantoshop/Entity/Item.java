@@ -2,6 +2,8 @@ package com.example.scantoshop.Entity;
 import androidx.annotation.NonNull;
 import androidx.room.*;
 
+import java.util.Objects;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -27,4 +29,17 @@ public class Item {
 
     @ColumnInfo(name = "category")
     public String category;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return upc.equals(item.upc);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(upc);
+    }
 }
