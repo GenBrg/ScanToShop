@@ -37,15 +37,11 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
     public class ViewHolder extends RecyclerView.ViewHolder{
         private Button deleteButton;
         private Button insertButton;
-        private TextView category;
         private ImageView itemImage;
-        private TextView itemName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             insertButton = itemView.findViewById(R.id.fav_insert_button);
-            category = itemView.findViewById(R.id.fav_category);
-            itemName = itemView.findViewById(R.id.fav_name);
             itemImage = itemView.findViewById(R.id.fav_imageView);
         }
     }
@@ -72,8 +68,6 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
         holder.insertButton.setOnClickListener(v -> {
             insertToShoppingList(position);
         });
-        holder.category.setText(String.valueOf(item.category));
-        holder.itemName.setText(item.iname);
         Picasso.with(context).load(item.image_path).placeholder(R.drawable.no_image_available).into(holder.itemImage);
         holder.itemImage.setOnClickListener(v->{
             Intent intent = new Intent(context, ItemDescriptionActivity.class);

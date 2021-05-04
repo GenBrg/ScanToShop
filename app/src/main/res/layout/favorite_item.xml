@@ -21,21 +21,6 @@
             app:srcCompat="@drawable/ic_star_24px"
             android:elevation="-1dp"/>
 
-        <TextView
-            android:id="@+id/fav_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/fav_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fav_name"
-            android:text="TextView" />
-
-
-
         <Button
             android:id="@+id/fav_insert_button"
             android:layout_width="match_parent"
