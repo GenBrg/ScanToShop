@@ -26,6 +26,7 @@ import androidx.room.Room;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,9 +84,9 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                             String itemName = foodHint.getString("label");
                             ((TextView) v.findViewById(R.id.scannedItemName)).setText(itemName);
                             String categoryString = foodHint.getString("category");
-                            ((TextView) v.findViewById(R.id.scannedItemCategory)).setText("Category: " + categoryString);
-                            String contentsString = "Contents: " + foodHint.getString("foodContentsLabel").toLowerCase();
-                            ((TextView) v.findViewById(R.id.scannedItemFoddContentsLabel)).setText(contentsString);
+                            ((TextView) v.findViewById(R.id.scannedItemCategory)).setText(Html.fromHtml("<b>Category: </b>" + categoryString));
+                            String contentsString = "<b>Contents: </b>" + foodHint.getString("foodContentsLabel").toLowerCase();
+                            ((TextView) v.findViewById(R.id.scannedItemFoddContentsLabel)).setText(Html.fromHtml(contentsString));
                             String warningString = "";
                             StringBuilder allergens = new StringBuilder("");
                             if (user.allergy_1) {
@@ -100,10 +101,10 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                             }
                             String allergenString = "";
                             if (allergens.length() != 0) {
-                                allergenString = "Allergens detected: " + allergens.toString().substring(0, allergens.length() - 2) + "\n";
+                                allergenString = "Allergens detected: " + allergens.toString().substring(0, allergens.length() - 2) + "<br>";
                             }
                             StringBuilder nutrientsWarning = new StringBuilder("");
-                            StringBuilder nutrients = new StringBuilder("Nutrients:\n");
+                            StringBuilder nutrients = new StringBuilder("<b>Nutrients: </b>");
                             Iterator<String> it = foodHint.getJSONObject("nutrients").keys();
                             while (it.hasNext()) {
                                 String key = it.next();
@@ -119,15 +120,15 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                                         .append(String.format("%.2f", value)).append("; ");
                             }
 
-                            ((TextView) v.findViewById(R.id.scannedItemNutrients)).setText(nutrients.toString());
+                            ((TextView) v.findViewById(R.id.scannedItemNutrients)).setText(Html.fromHtml(nutrients.toString()));
                             String nutrientsWarningString = "";
                             if (nutrientsWarning.length() != 0) {
                                 nutrientsWarningString = "Nutrients exceeds threshold: " + nutrientsWarning.toString().substring(0, nutrientsWarning.length() - 2);
                             }
                             if (nutrientsWarningString.length() + allergenString.length() > 0) {
-                                warningString = "Warnings:\n" + allergenString + nutrientsWarningString;
+                                warningString = "<b>WARNING:</b><br>" + allergenString + nutrientsWarningString;
                             }
-                            ((TextView) v.findViewById(R.id.scannedItemWarnings)).setText(warningString);
+                            ((TextView) v.findViewById(R.id.scannedItemWarnings)).setText(Html.fromHtml(warningString));
                             ((TextView) v.findViewById(R.id.scannedItemWarnings)).setTextColor(Color.RED);
                             String imageURL = foodHint.getString("image");
                             Picasso.with(v.getContext()).load(imageURL).into((ImageView) v.findViewById(R.id.scannedItemImage));
