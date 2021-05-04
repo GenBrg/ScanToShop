@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="downButton" type="id" />
+    <item name="up_button" type="id" />
+    <item name="shopping_item_cardview" type="id" />
+    <item name="item_img" type="id" />
+    <item name="item_quantity" type="id" />
+    <item name="item_delete" type="id" />
+    <item name="add_item_button" type="id" />
+    <item name="remove_item_button" type="id" />
+</resources>

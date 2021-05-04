@@ -34,28 +34,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-//         Passing each menu ID as a set of Ids because each
-//         menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_shoplist, R.id.navigation_history, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        //AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-        //        AppDatabase.class, "scan_to_shop_database").build();
-        //ProfileDAO profileDao = db.profileDAO();
-        //Profile[] profiles = profileDao.loadAllProfiles();
-//
-//        button1 = findViewById(R.id.button1);
-//        button1.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v){
-//                Intent i = new Intent(MainActivity.this,HistoryDetailActivity.class);
-//                startActivity(i);
-//            }
-//        });
 
     }
 

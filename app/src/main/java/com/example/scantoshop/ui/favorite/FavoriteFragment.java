@@ -18,6 +18,7 @@ public class FavoriteFragment extends Fragment {
 
     private FavoriteViewModel favoriteViewModel;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         favoriteViewModel = ViewModelProviders.of(this).get(FavoriteViewModel.class);
