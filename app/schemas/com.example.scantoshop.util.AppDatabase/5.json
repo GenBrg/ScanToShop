@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 5,
-    "identityHash": "8fec15e0738eee89e0d473cfe99ccd0b",
+    "identityHash": "6bd27531322c9f1b53c2b1b774d5b086",
     "entities": [
       {
         "tableName": "Profile",
@@ -56,12 +56,12 @@
       },
       {
         "tableName": "Item",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upc` INTEGER NOT NULL, `item_name` TEXT, `item_image` TEXT, `nutrient` TEXT, `health_label` TEXT, `category` TEXT, PRIMARY KEY(`upc`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upc` TEXT NOT NULL, `item_name` TEXT, `item_image` TEXT, `nutrient` TEXT, `health_label` TEXT, `category` TEXT, PRIMARY KEY(`upc`))",
         "fields": [
           {
             "fieldPath": "upc",
             "columnName": "upc",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -200,7 +200,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8fec15e0738eee89e0d473cfe99ccd0b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6bd27531322c9f1b53c2b1b774d5b086')"
     ]
   }
 }

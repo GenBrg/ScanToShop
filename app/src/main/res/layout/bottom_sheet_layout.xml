@@ -27,25 +27,54 @@
 
             <ImageView
                 android:id="@+id/scannedItemImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/no_image_available" />
+
+            <TextView
+                android:id="@+id/scannedItemWarnings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/no_image_available" />
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/scannedItemCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/scannedItemFoddContentsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/scannedItemNutrients"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/rawResponse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fetching product info..." />
+                android:text="Fetching product info..."
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/addToShopListButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/cancelScanButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
