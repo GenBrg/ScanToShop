@@ -9,7 +9,7 @@ import androidx.room.*;
 @Entity(primaryKeys = {"upc", "uid"})
 public class ItemProfileCrossRef {
     @NonNull
-    public int upc;
+    public String upc;
     @NonNull
     public String uid;
 }
