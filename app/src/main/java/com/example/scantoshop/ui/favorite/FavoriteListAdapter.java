@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +24,7 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
     private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private ImageButton deleteButton;
+        private Button deleteButton;
         private TextView category;
         // TODO Load image
 //        private ImageView itemImage;
@@ -33,7 +34,7 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
             super(itemView);
             deleteButton = itemView.findViewById(R.id.fav_del_button);
             category = itemView.findViewById(R.id.fav_category);
-            itemName = itemView.findViewById(R.id.fav_imageView);
+            itemName = itemView.findViewById(R.id.fav_name);
         }
     }
 
@@ -48,7 +49,7 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.shopping_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.favorite_item, parent, false));
     }
 
     @Override
