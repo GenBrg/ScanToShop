@@ -31,4 +31,8 @@ public interface ProfileDAO {
     @Transaction
     @Query("SELECT * FROM Profile")
     public List<ProfileWithFavoriteItems> getProfileWithFavoriteItems();
+
+    @Transaction
+    @Query("SELECT * FROM Profile")
+    public List<ProfileWithCurrentShoppingListEntry> getShoppingList();
 }

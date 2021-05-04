@@ -1,6 +1,8 @@
 package com.example.scantoshop.Entity;
+import androidx.annotation.NonNull;
 import androidx.room.*;
-import java.nio.file.Path;
+
+import javax.annotation.Nonnull;
 
 /**
  * Item Entity
@@ -8,7 +10,8 @@ import java.nio.file.Path;
 @Entity
 public class Item {
     @PrimaryKey
-    public int upc;
+    @NonNull
+    public String upc;
 
     @ColumnInfo(name = "item_name")
     public String iname;

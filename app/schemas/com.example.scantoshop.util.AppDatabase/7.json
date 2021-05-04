@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 5,
-    "identityHash": "6bd27531322c9f1b53c2b1b774d5b086",
+    "version": 7,
+    "identityHash": "722283aa0daf6e897306b4c9e8f9e44e",
     "entities": [
       {
         "tableName": "Profile",
@@ -138,12 +138,12 @@
       },
       {
         "tableName": "ItemHistoryCrossRef",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upc` INTEGER NOT NULL, `pid` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, PRIMARY KEY(`upc`, `pid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upc` TEXT NOT NULL, `pid` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, PRIMARY KEY(`upc`, `pid`))",
         "fields": [
           {
             "fieldPath": "upc",
             "columnName": "upc",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -171,12 +171,12 @@
       },
       {
         "tableName": "ItemProfileCrossRef",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upc` INTEGER NOT NULL, `uid` TEXT NOT NULL, PRIMARY KEY(`upc`, `uid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upc` TEXT NOT NULL, `uid` TEXT NOT NULL, PRIMARY KEY(`upc`, `uid`))",
         "fields": [
           {
             "fieldPath": "upc",
             "columnName": "upc",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -195,12 +195,50 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "CurrentShoppingListEntry",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entryid` INTEGER NOT NULL, `uid` TEXT NOT NULL, `upc` TEXT NOT NULL, `quantity` INTEGER NOT NULL, PRIMARY KEY(`entryid`))",
+        "fields": [
+          {
+            "fieldPath": "entryid",
+            "columnName": "entryid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "upc",
+            "columnName": "upc",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "entryid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6bd27531322c9f1b53c2b1b774d5b086')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '722283aa0daf6e897306b4c9e8f9e44e')"
     ]
   }
 }

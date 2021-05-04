@@ -56,7 +56,7 @@ public final class LivePreviewActivity extends AppCompatActivity
   private CameraSourcePreview preview;
   private GraphicOverlay graphicOverlay;
   private String selectedModel = BARCODE_SCANNING;
-
+  private boolean detectedBarcode = false;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -255,11 +255,17 @@ public final class LivePreviewActivity extends AppCompatActivity
     return false;
   }
   public void onBarcodeDetected(String barcodeRawValue){
+    if(detectedBarcode)
+      return;
     onPause();
+    detectedBarcode = true;
     Bundle bundle = new Bundle();
     bundle.putString("barcodeRawValue", barcodeRawValue);
     ItemDialogFragment itemDialog = new ItemDialogFragment();
     itemDialog.show(getSupportFragmentManager(), "ModalBottomSheet");
     itemDialog.setArguments(bundle);
+  }
+  public void resetDetectedBarcodeStatus(){
+    detectedBarcode = false;
   }
 }

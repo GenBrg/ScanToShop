@@ -21,8 +21,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.example.scantoshop.DAO.EntryDAO;
 import com.example.scantoshop.DAO.ItemDAO;
+import com.example.scantoshop.DAO.ItemProfileCrossRefDAO;
 import com.example.scantoshop.DAO.ProfileDAO;
+import com.example.scantoshop.Entity.CurrentShoppingListEntry;
 import com.example.scantoshop.Entity.Item;
 import com.example.scantoshop.Entity.Profile;
 import com.example.scantoshop.R;
@@ -59,7 +62,7 @@ public class FavoriteFragment extends Fragment {
 
         List<Item> favoriteItemsFull = new ArrayList<>();
         for (Item item: this.favoriteItems) {
-            int upc = item.upc;
+            String upc = item.upc;
             Item fullItem = itemDAO.loadItemByUPC(upc)[0];
             favoriteItemsFull.add(fullItem);
         }
@@ -76,24 +79,23 @@ public class FavoriteFragment extends Fragment {
             categorizedItems.get(item.category).add(item);
         }
         Log.i("myTag", categories);
-        TextView textView = (TextView)root.findViewById(R.id.textView8);
-        textView.setText(categories);
 
         for (Map.Entry<String, List<Item>> entry: categorizedItems.entrySet()) {
             fullList.addAll(entry.getValue());
         }
 
-        final FavoriteListAdapter currentfavListAdapter = new FavoriteListAdapter(fullList);
+        // test add new CurrentShoppingListEntry
+        CurrentShoppingListEntry newEntry = new CurrentShoppingListEntry("1", "1", 1);
+        EntryDAO entryDAO = db.entryDAO();
+        entryDAO.insertEntry(newEntry);
+        Log.i("DATABASE", "new entry inserted");
+
+        final FavoriteListAdapter currentfavListAdapter = new FavoriteListAdapter(fullList, entryDAO);
 
         itemView = root.findViewById(R.id.fav_recycle);
         itemView.setAdapter(currentfavListAdapter);
         itemView.setLayoutManager(new GridLayoutManager(requireContext(), SPAN_COUNT));
 
-        //submitButton = root.findViewById(R.id.submit_shoppinglist_button);
-
-        //submitButton.setOnClickListener(v->{
-        //    currentShoppingListAdapter.commitShoppingList();
-        //});
 
         return root;
     }

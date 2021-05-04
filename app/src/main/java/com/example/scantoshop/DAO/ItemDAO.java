@@ -7,6 +7,9 @@ public interface ItemDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertItems(Item... items);
 
+    @Insert
+    public void insertItem(Item item);
+
     @Update
     public void updateItems(Item... items);
 
@@ -20,7 +23,7 @@ public interface ItemDAO {
     public Item[] loadAllItems();
 
     @Query("SELECT * FROM item WHERE upc == :upc")
-    public Item[] loadItemByUPC(int upc);
+    public Item[] loadItemByUPC(String upc);
 
     @Query("SELECT * FROM itemprofilecrossref WHERE uid == :uid")
     public Item[] loadItemByUID(int uid);

@@ -1,4 +1,5 @@
 package com.example.scantoshop.Entity;
+import androidx.annotation.NonNull;
 import androidx.room.*;
 
 /**
@@ -7,7 +8,8 @@ import androidx.room.*;
  */
 @Entity(primaryKeys = {"upc", "pid"})
 public class ItemHistoryCrossRef {
-    public int upc;
+    @NonNull
+    public String upc;
     public int pid;
     public int quantity;
 }
