@@ -1,4 +1,4 @@
-package com.example.scantoshop.ui.shoplist;
+package com.example.scantoshop.ui.favorite;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,40 +11,37 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.scantoshop.Entity.Item;
 import com.example.scantoshop.R;
+import com.example.scantoshop.ui.shoplist.ShoppingItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShoppingListAdapter.ViewHolder> {
-    private List<ShoppingItem> shoppingList = new ArrayList<>();
+public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapter.ViewHolder> {
+    private List<Item> favList = new ArrayList<>();
     private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private ImageButton upButton, downButton, deleteButton;
-        private TextView quantity;
+        private ImageButton deleteButton;
+        private TextView category;
         // TODO Load image
 //        private ImageView itemImage;
-        private TextView itemImage;
+        private TextView itemName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            upButton = itemView.findViewById(R.id.add_item_button);
-            downButton = itemView.findViewById(R.id.remove_item_button);
-            deleteButton = itemView.findViewById(R.id.item_delete);
-            quantity = itemView.findViewById(R.id.item_quantity);
-            // TODO Load image
-//            itemImage.findViewById(R.id.item_img);
-            itemImage = itemView.findViewById(R.id.favorite_img);
+            deleteButton = itemView.findViewById(R.id.fav_del_button);
+            category = itemView.findViewById(R.id.fav_category);
+            itemName = itemView.findViewById(R.id.fav_imageView);
         }
     }
 
-    public CurrentShoppingListAdapter() {
+    public FavoriteListAdapter(List<Item> itemList) {
         // TODO Load initial shopping list from database
-        shoppingList.add(new ShoppingItem("Apple", 3));
-        shoppingList.add(new ShoppingItem("Banana", 1));
-        shoppingList.add(new ShoppingItem("Strawberry", 4));
-        shoppingList.add(new ShoppingItem("Watermelon", 5));
+        for (Item item: itemList) {
+            favList.add(item);
+        }
     }
 
     @NonNull
@@ -56,25 +53,19 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final ShoppingItem item = shoppingList.get(position);
+        final Item item = favList.get(position);
 
-        holder.upButton.setOnClickListener(v->{
-            setQuantity(item, item.getQuantity() + 1);
-        });
-        holder.downButton.setOnClickListener(v->{
-            setQuantity(item, item.getQuantity() - 1);
-        });
         holder.deleteButton.setOnClickListener(v->{
             deleteItem(position);
         });
 
-        holder.quantity.setText(String.valueOf(item.getQuantity()));
-        holder.itemImage.setText(item.getName());
+        holder.category.setText(String.valueOf(item.category));
+        holder.itemName.setText(item.iname);
     }
 
     @Override
     public int getItemCount() {
-        return shoppingList.size();
+        return favList.size();
     }
 
     private void setQuantity(ShoppingItem item, int quantity) {
@@ -88,12 +79,12 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
 
     private void deleteItem(int position) {
         // TODO Delete in database
-        shoppingList.remove(position);
+        favList.remove(position);
         notifyDataSetChanged();
     }
 
-    private void AddItem(ShoppingItem item) {
-        shoppingList.add(item);
+    private void AddItem(Item item) {
+        favList.add(item);
         // TODO Commit to Database
         notifyDataSetChanged();
     }
@@ -101,8 +92,8 @@ public class CurrentShoppingListAdapter extends RecyclerView.Adapter<CurrentShop
     void commitShoppingList() {
         // TODO Commit to Database
 
-        Toast.makeText(context, "Successfully commit shopping list!", Toast.LENGTH_SHORT).show();
-        shoppingList = new ArrayList<>();
+        Toast.makeText(context, "Successfully commit fav list!", Toast.LENGTH_SHORT).show();
+        favList = new ArrayList<>();
         notifyDataSetChanged();
     }
 }

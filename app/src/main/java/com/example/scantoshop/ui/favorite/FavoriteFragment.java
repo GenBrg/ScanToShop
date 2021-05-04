@@ -17,6 +17,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.scantoshop.DAO.ItemDAO;
@@ -24,6 +26,7 @@ import com.example.scantoshop.DAO.ProfileDAO;
 import com.example.scantoshop.Entity.Item;
 import com.example.scantoshop.Entity.Profile;
 import com.example.scantoshop.R;
+import com.example.scantoshop.ui.shoplist.CurrentShoppingListAdapter;
 import com.example.scantoshop.util.AppDatabase;
 
 import java.lang.reflect.Array;
@@ -37,7 +40,9 @@ import static android.widget.LinearLayout.VERTICAL;
 public class FavoriteFragment extends Fragment {
 
     private FavoriteViewModel favoriteViewModel;
+    private RecyclerView itemView;
     private Item[] favoriteItems;
+    private static final int SPAN_COUNT = 3;
     private int uid = 1; // default user
 
 
@@ -61,6 +66,7 @@ public class FavoriteFragment extends Fragment {
 
         String categories = "";
         Map<String, List<Item>> categorizedItems = new HashMap<>();
+        List<Item> fullList = new ArrayList<>();
         for (Item item: favoriteItemsFull) {
             Log.i("CATEGORY", ""+item.category);
             categories += item.category + "\n";
@@ -73,26 +79,21 @@ public class FavoriteFragment extends Fragment {
         TextView textView = (TextView)root.findViewById(R.id.textView8);
         textView.setText(categories);
 
-        LinearLayout outerMost = (LinearLayout)root.findViewById(R.id.outermost);
         for (Map.Entry<String, List<Item>> entry: categorizedItems.entrySet()) {
-            Log.i("DYNAMIC", "View added " + entry.getKey());
-            CardView cardView = new CardView(outerMost.getContext());
-            LinearLayout outer = new LinearLayout(cardView.getContext());
-
-            String category = entry.getKey();
-            TextView title = new TextView(outer.getContext());
-            title.setText(category);
-
-            LinearLayout inner = new LinearLayout(outer.getContext());
-            inner.setOrientation(VERTICAL);
-
-            for (Item item: entry.getValue()) {
-                CardView itemCard = new CardView(getContext());
-                ImageView imageView = new ImageView(itemCard.getContext());
-                TextView itemName = new TextView(itemCard.getContext());
-                itemName.setText(item.iname);
-            }
+            fullList.addAll(entry.getValue());
         }
+
+        final FavoriteListAdapter currentfavListAdapter = new FavoriteListAdapter(fullList);
+
+        itemView = root.findViewById(R.id.fav_recycle);
+        itemView.setAdapter(currentfavListAdapter);
+        itemView.setLayoutManager(new GridLayoutManager(requireContext(), SPAN_COUNT));
+
+        //submitButton = root.findViewById(R.id.submit_shoppinglist_button);
+
+        //submitButton.setOnClickListener(v->{
+        //    currentShoppingListAdapter.commitShoppingList();
+        //});
 
         return root;
     }
