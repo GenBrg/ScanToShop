@@ -132,18 +132,18 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                             ((TextView) v.findViewById(R.id.scannedItemWarnings)).setTextColor(Color.RED);
                             String imageURL = foodHint.getString("image");
                             Picasso.with(v.getContext()).load(imageURL).into((ImageView) v.findViewById(R.id.scannedItemImage));
-                            ItemDAO itemDAO = db.itemDAO();
-                            Item item = new Item();
-                            item.upc = barcodeValue;
-                            item.iname = itemName;
-                            item.image_path = imageURL;
-                            item.nutrient = nutrients.toString();
-                            item.health_label = contentsString;
-                            item.category = categoryString;
-                            itemDAO.insertItems(item);
                             Button addButton = v.findViewById(R.id.addToShopListButton);
                             addButton.setOnClickListener(
                                     v -> {
+                                        ItemDAO itemDAO = db.itemDAO();
+                                        Item item = new Item();
+                                        item.upc = barcodeValue;
+                                        item.iname = itemName;
+                                        item.image_path = imageURL;
+                                        item.nutrient = nutrients.toString();
+                                        item.health_label = contentsString;
+                                        item.category = categoryString;
+                                        itemDAO.insertItems(item);
                                         Intent intent = new Intent(getContext(), MainActivity.class);
                                         startActivity(intent);
                                     });
