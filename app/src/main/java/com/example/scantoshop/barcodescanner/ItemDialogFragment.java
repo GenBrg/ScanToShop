@@ -14,8 +14,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.scantoshop.DAO.ItemDAO;
 import com.example.scantoshop.DAO.ProfileDAO;
+import com.example.scantoshop.Entity.CurrentShoppingListEntry;
 import com.example.scantoshop.Entity.Item;
 import com.example.scantoshop.Entity.Profile;
+import com.example.scantoshop.Entity.ProfileWithCurrentShoppingListEntry;
 import com.example.scantoshop.MainActivity;
 import com.example.scantoshop.R;
 import com.example.scantoshop.util.AppDatabase;
@@ -38,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentNavigableMap;
 
 /**
  * <p>A fragment that shows a list of items as a modal bottom sheet.</p>
@@ -136,14 +139,36 @@ public class ItemDialogFragment extends BottomSheetDialogFragment {
                             addButton.setOnClickListener(
                                     v -> {
                                         ItemDAO itemDAO = db.itemDAO();
-                                        Item item = new Item();
-                                        item.upc = barcodeValue;
-                                        item.iname = itemName;
-                                        item.image_path = imageURL;
-                                        item.nutrient = nutrients.toString();
-                                        item.health_label = contentsString;
-                                        item.category = categoryString;
-                                        itemDAO.insertItems(item);
+                                        Item item;
+                                        boolean existsItem = false;
+                                        for(Item i:itemDAO.loadAllItems()){
+                                            if(i.upc.equals(barcodeValue)){
+                                                item = i;
+                                                existsItem = true;
+                                                break;
+                                            }
+                                        }
+                                        if(!existsItem){
+                                            item = new Item();
+                                            item.upc = barcodeValue;
+                                            item.iname = itemName;
+                                            item.image_path = imageURL;
+                                            item.nutrient = nutrients.toString();
+                                            item.health_label = contentsString;
+                                            item.category = categoryString;
+                                            itemDAO.insertItems(item);
+                                        }
+                                        boolean itemInList = false;
+                                        for(CurrentShoppingListEntry entry: profileDao.getShoppingList().get(0).currentShoppingList){
+                                            if(entry.upc == barcodeValue){
+                                                entry.quantity++;
+                                                itemInList = true;
+                                                break;
+                                            }
+                                        }
+                                        if (!itemInList){
+                                            // Create a new entry
+                                        }
                                         Intent intent = new Intent(getContext(), MainActivity.class);
                                         startActivity(intent);
                                     });
