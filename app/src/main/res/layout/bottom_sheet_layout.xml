@@ -35,28 +35,45 @@
                 android:id="@+id/scannedItemWarnings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:foregroundTint="#FF0000" />
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/scannedItemCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/scannedItemFoddContentsLabel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/scannedItemNutrients"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/rawResponse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fetching product info..." />
+                android:text="Fetching product info..."
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/addToShopListButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/cancelScanButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
